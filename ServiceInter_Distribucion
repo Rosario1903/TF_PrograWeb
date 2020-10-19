@@ -1,0 +1,7 @@
+package pe.edu.upc.serviceinterface;
+import java.util.List;
+import pe.edu.upc.entity.Distribucion;
+
+public interface IDistribucionService {
+	public void insert(Distribucion dis);
+	List<Distribucion>list();
