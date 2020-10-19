@@ -1,0 +1,9 @@
+package pe.edu.upc.serviceinterface;
+import java.util.List;
+
+
+import pe.edu.upc.entity.Local;
+public interface ILocalService {
+	public void insert(Local loc);
+	List<Local>list();
+}
