@@ -1,0 +1,62 @@
+package pe.edu.upc.entity;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+@Entity
+@Table(name = "distribuciones")
+public class Distribucion {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int idDistribucion;
+	@Column(name = "tipoDistribucion", length = 40, nullable = false)
+	private String tipoDistribucion;
+	@NotNull(message = "la fecha es obligatoria")
+	@Past(message = "La fecha debe ser pasada")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "dateLaboratory")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dateLaboratory;
+	public Distribucion() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Distribucion(int idDistribucion, String tipoDistribucion,
+			@NotNull(message = "la fecha es obligatoria") @Past(message = "La fecha debe ser pasada") Date dateLaboratory) {
+		super();
+		this.idDistribucion = idDistribucion;
+		this.tipoDistribucion = tipoDistribucion;
+		this.dateLaboratory = dateLaboratory;
+	}
+	public int getIdDistribucion() {
+		return idDistribucion;
+	}
+	public void setIdDistribucion(int idDistribucion) {
+		this.idDistribucion = idDistribucion;
+	}
+	public String getTipoDistribucion() {
+		return tipoDistribucion;
+	}
+	public void setTipoDistribucion(String tipoDistribucion) {
+		this.tipoDistribucion = tipoDistribucion;
+	}
+	public Date getDateLaboratory() {
+		return dateLaboratory;
+	}
+	public void setDateLaboratory(Date dateLaboratory) {
+		this.dateLaboratory = dateLaboratory;
+	}
+	
+	
+}
