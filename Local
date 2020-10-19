@@ -1,0 +1,59 @@
+package pe.edu.upc.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name = "locales")
+public class Local {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int idLocal;
+	@Column(name = "nameLocal", length = 40, nullable = false)
+	private String nameLocal;
+	@Column(name = "adressLocal", length = 60, nullable = false)
+	private String adressLocal;
+	@Column(name = "numberproLocal", length = 60, nullable = false)
+	private String numberproLocal;
+	public Local() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Local(int idLocal, String nameLocal, String adressLocal, String numberproLocal) {
+		super();
+		this.idLocal = idLocal;
+		this.nameLocal = nameLocal;
+		this.adressLocal = adressLocal;
+		this.numberproLocal = numberproLocal;
+	}
+	public int getIdLocal() {
+		return idLocal;
+	}
+	public void setIdLocal(int idLocal) {
+		this.idLocal = idLocal;
+	}
+	public String getNameLocal() {
+		return nameLocal;
+	}
+	public void setNameLocal(String nameLocal) {
+		this.nameLocal = nameLocal;
+	}
+	public String getAdressLocal() {
+		return adressLocal;
+	}
+	public void setAdressLocal(String adressLocal) {
+		this.adressLocal = adressLocal;
+	}
+	public String getNumberproLocal() {
+		return numberproLocal;
+	}
+	public void setNumberproLocal(String numberproLocal) {
+		this.numberproLocal = numberproLocal;
+	}
+	
+}
