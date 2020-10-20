@@ -1,0 +1,12 @@
+package pe.edu.upc.serviceinterface;
+
+import java.util.List;
+
+import pe.edu.upc.entity.Producto;
+
+public interface IProductoService {
+
+	public void insert (Producto prod);
+	
+	List<Producto>list();
+}
