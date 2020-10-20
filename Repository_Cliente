@@ -1,11 +1,11 @@
-package pe.edu.upc.serviceinterface;
+package pe.edu.upc.repository;
 
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import pe.edu.upc.entity.Cliente;
 
-public interface IClienteService {
+@Repository
+public interface ClienteRepository extends JpaRepository<Cliente, Integer>{
 
-	public void insert(Cliente cli);
-	List<Cliente> listCliente();
 }
