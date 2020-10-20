@@ -1,0 +1,9 @@
+package pe.edu.upc.serviceinterface;
+
+import pe.edu.upc.entity.Tarjeta;
+
+public interface ITarjetaService {
+	
+	public void insert(Tarjeta tar);
+
+}
