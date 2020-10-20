@@ -1,0 +1,54 @@
+package pe.edu.upc.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+@Entity
+@Table(name = "Clientes")
+
+public class Cliente {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
+	private int idCliente;
+	
+	@Column(name = "dni", length = 7, nullable = false)
+	@NotNull(message = "El dni es obligatorio")
+	private int dni;
+	
+	public Cliente() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Cliente(int idCliente, int dni) {
+		super();
+		this.idCliente = idCliente;
+		this.dni = dni;
+	}
+
+	public int getIdCliente() {
+		return idCliente;
+	}
+
+	public void setIdCliente(int idCliente) {
+		this.idCliente = idCliente;
+	}
+
+	public int getDni() {
+		return dni;
+	}
+
+	public void setDni(int dni) {
+		this.dni = dni;
+	}
+	
+	
+
+}
