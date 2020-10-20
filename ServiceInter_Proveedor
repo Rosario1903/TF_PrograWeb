@@ -1,0 +1,13 @@
+package pe.edu.upc.serviceinterface;
+
+import java.util.List;
+
+import pe.edu.upc.entity.Proveedor;
+
+public interface IProveedorService {
+
+	public void insert(Proveedor pro);
+	
+	List<Proveedor> listProveedor();
+	
+}
