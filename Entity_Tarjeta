@@ -1,0 +1,82 @@
+package pe.edu.upc.entity;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+public class Tarjeta {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	public int idTarjeta;
+	
+	private int numTarjeta;
+	
+	private int cciTarjeta;	
+	
+	@Column(name="name",nullable=false,length = 45)
+	private String nameTarjeta;
+	
+	@Column(name="ExDate")
+	private Date ExDate;
+
+	public Tarjeta() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Tarjeta(int idTarjeta, int numTarjeta, int cciTarjeta, String nameTarjeta, Date exDate) {
+		super();
+		this.idTarjeta = idTarjeta;
+		this.numTarjeta = numTarjeta;
+		this.cciTarjeta = cciTarjeta;
+		this.nameTarjeta = nameTarjeta;
+		ExDate = exDate;
+	}
+
+	public int getIdTarjeta() {
+		return idTarjeta;
+	}
+
+	public void setIdTarjeta(int idTarjeta) {
+		this.idTarjeta = idTarjeta;
+	}
+
+	public int getNumTarjeta() {
+		return numTarjeta;
+	}
+
+	public void setNumTarjeta(int numTarjeta) {
+		this.numTarjeta = numTarjeta;
+	}
+
+	public int getCciTarjeta() {
+		return cciTarjeta;
+	}
+
+	public void setCciTarjeta(int cciTarjeta) {
+		this.cciTarjeta = cciTarjeta;
+	}
+
+	public String getNameTarjeta() {
+		return nameTarjeta;
+	}
+
+	public void setNameTarjeta(String nameTarjeta) {
+		this.nameTarjeta = nameTarjeta;
+	}
+
+	public Date getExDate() {
+		return ExDate;
+	}
+
+	public void setExDate(Date exDate) {
+		ExDate = exDate;
+	}
+	
+	
+	
+}
