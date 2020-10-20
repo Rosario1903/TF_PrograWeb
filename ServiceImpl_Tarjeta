@@ -1,0 +1,25 @@
+package pe.edu.upc.serviceimpl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import pe.edu.upc.entity.Tarjeta;
+import pe.edu.upc.repository.TarjetaRepository;
+import pe.edu.upc.serviceinterface.ITarjetaService;
+
+public class TarjetaServiceImpl implements ITarjetaService{
+	
+	@Autowired
+	private TarjetaRepository tR;
+	
+	@Override
+	public void insert(Tarjeta tar) {
+		
+		try {
+			tR.save(tar);
+		} catch (Exception e) {
+			System.out.println("Error en el serviceimpl Tarjeta");
+		}
+	}
+
+	
+}
