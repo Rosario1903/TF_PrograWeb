@@ -1,0 +1,36 @@
+package pe.edu.upc.serviceimpl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import pe.edu.upc.entity.Proveedor;
+import pe.edu.upc.repository.ProveedorRepository;
+import pe.edu.upc.serviceinterface.IProveedorService;
+
+@Service
+public class ProveedorServiceImpl implements IProveedorService{
+
+	@Autowired
+	private ProveedorRepository pR;
+	
+	@Override
+	public void insert(Proveedor pro) {
+		try {
+			pR.save(pro);
+			
+		} catch (Exception e) {
+			System.out.println("Error en el serviceimpl Proveedor");
+		}
+		
+	}
+
+	@Override
+	public List<Proveedor> listProveedor() {
+		// TODO Auto-generated method stub
+		return pR.findAll();
+	}
+
+	
+}
