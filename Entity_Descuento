@@ -1,0 +1,63 @@
+package pe.edu.upc.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+
+@Entity
+@Table(name = "Descuentos")
+
+public class Descuento {
+		@Id
+		@GeneratedValue(strategy = GenerationType.IDENTITY)
+
+		private int idDescuento;
+
+		@Column(name = "priceDescuento", length = 40, nullable = false)
+		private String priceDescuento;
+		private int idProducto;
+
+		public Descuento() {
+			super();
+			// TODO Auto-generated constructor stub
+		}
+
+		public Descuento(int idDescuento, String priceDescuento, int idProducto) {
+			super();
+			this.idDescuento = idDescuento;
+			this.priceDescuento = priceDescuento;
+			this.idProducto = idProducto;
+			
+		}
+
+		public int getIdDescuento() {
+			return idDescuento;
+		}
+
+		public void setIdDescuento(int idDescuento) {
+			this.idDescuento = idDescuento;
+		}
+
+		public String getPriceDescuento() {
+			return priceDescuento;
+		}
+
+		public void setPriceDescuento(String priceDescuento) {
+			this.priceDescuento = priceDescuento;
+		}
+
+		public String getIdProducto() {
+			return idProducto;
+		}
+
+		public void setIdProducto(String idProducto) {
+			this.idProducto = idProducto;
+		}
+
+		
+	}
