@@ -1,0 +1,106 @@
+package pe.edu.upc.entity;
+
+
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name = "products")
+public class Product {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int idProduct;
+	@Column(name = "modelProduct", length = 40, nullable = false)
+	private String modelProduct;
+	@Column(name = "markProduct", length = 60, nullable = false)
+	private String markProduct;
+	@Column(name = "sizeProduct", length = 45, nullable = false)
+	private int sizeProduct;
+	@Column(name = "typeProduct", length = 60, nullable = false)
+	private String typeProduct;
+	@Column(name = "priceProduct", length = 45, nullable = false)
+	private int priceProduct;
+	@Column(name = "colourProduct", length = 45, nullable = false)
+	private String colourProduct;
+
+	public Product() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Product(int idProduct, String modelProduct, String markProduct, int sizeProduct, String typeProduct,int priceProduct, String colourProduct) {
+		super();
+		this.idProduct = idProduct;
+		this.modelProduct = modelProduct;
+		this.markProduct = markProduct;
+		this.sizeProduct = sizeProduct;
+		this.typeProduct = typeProduct;
+		this.priceProduct = priceProduct;
+		this.colourProduct = colourProduct;
+
+	}
+
+	public int getIdProduct() {
+		return idProduct;
+	}
+
+	public void setIdProduct(int idProduct) {
+		this.idProduct = idProduct;
+	}
+
+	public String getModelProduct() {
+		return modelProduct;
+	}
+
+	public void setModelProduct(String modelProduct) {
+		this.modelProduct = modelProduct;
+	}
+
+	public String getMarkProduct() {
+		return markProduct;
+	}
+
+	public void setMarkProduct(String markProduct) {
+		this.markProduct = markProduct;
+	}
+
+	public int getSizeProduct() {
+		return sizeProduct;
+	}
+
+	public void setSizeProduct(int sizeProduct) {
+		this.sizeProduct = sizeProduct;
+	}
+
+	public String getTypeProduct() {
+		return typeProduct;
+	}
+
+	public void setTypeProduct(String typeProduct) {
+		this.typeProduct = typeProduct;
+	}
+	
+	public int getPriceProduct() {
+		return priceProduct;
+	}
+
+	public void setPriceProduct(int priceProduct) {
+		this.priceProduct = priceProduct;
+	}
+	
+	public String getColourProduct() {
+		return colourProduct;
+	}
+
+	public void setColourProduct(String colourProduct) {
+		this.colourProduct = colourProduct;
+	}
+
+}
