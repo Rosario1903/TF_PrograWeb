@@ -1,0 +1,29 @@
+package pe.edu.upc.serviceimpl;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import pe.edu.upc.entity.ProductoxProveedor;
+import pe.edu.upc.repository.ProductoxProveedorRepository;
+import pe.edu.upc.serviceinterface.IProductoxProveedorService;
+@Service
+public class ProductoxProveedorServiceImpl implements IProductoxProveedorService {
+
+	@Autowired
+	private ProductoxProveedorRepository ppR;
+	@Transactional
+	@Override
+	public void insert(ProductoxProveedor proxpro) {
+		ppR.save(proxpro);
+		
+	}
+
+	@Override
+	public List<ProductoxProveedor> list() {
+		
+		return ppR.findAll();
+	}
+
+}
