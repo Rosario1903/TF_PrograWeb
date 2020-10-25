@@ -1,0 +1,101 @@
+package pe.edu.upc.entity;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.FutureOrPresent;
+
+import javax.validation.constraints.NotNull;
+import org.springframework.format.annotation.DateTimeFormat;
+
+@Entity
+@Table(name = "proxpro")
+public class ProductoxProveedor {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int idProxpro;
+	@Column(name = "numberProxpro", length = 45, nullable = false)
+	private int numberProxpro;
+	
+	@NotNull(message = "la fecha es obligatoria")
+	@FutureOrPresent(message = "la fecha debe ser actual o futura")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "DateProxpro")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date DateProxpro;
+	
+	@ManyToOne
+	@JoinColumn(name = "idProduct")
+	private Product product;
+	
+	@ManyToOne
+	@JoinColumn(name = "idProveedor")
+	private Proveedor proveedor;
+
+	public ProductoxProveedor() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public ProductoxProveedor(int idProxpro, int numberProxpro, @FutureOrPresent Date dateProxpro,
+			Product product, Proveedor proveedor) {
+		super();
+		this.idProxpro = idProxpro;
+		this.numberProxpro = numberProxpro;
+		this.DateProxpro = dateProxpro;
+		this.product = product;
+		this.proveedor = proveedor;
+	}
+
+	public int getIdProxpro() {
+		return idProxpro;
+	}
+
+	public void setIdProxpro(int idProxpro) {
+		this.idProxpro = idProxpro;
+	}
+
+	public int getNumberProxpro() {
+		return numberProxpro;
+	}
+
+	public void setNumberProxpro(int numberProxpro) {
+		this.numberProxpro = numberProxpro;
+	}
+
+	public Date getDateProxpro() {
+		return DateProxpro;
+	}
+
+	public void setDateProxpro(Date dateProxpro) {
+		this.DateProxpro = dateProxpro;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+	public Proveedor getProveedor() {
+		return proveedor;
+	}
+
+	public void setProveedor(Proveedor proveedor) {
+		this.proveedor = proveedor;
+	}
+	
+	
+	
+}
