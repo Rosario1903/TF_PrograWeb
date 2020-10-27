@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import pe.edu.upc.entity.Tarjeta;
 
 @Repository
-public interface TarjetaRepository extends JpaRepository<Tarjeta, Integer>{
+public interface TarjetaRepository extends JpaRepository<Tarjeta, Integer> {
 
 }
