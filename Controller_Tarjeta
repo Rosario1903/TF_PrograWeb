@@ -1,0 +1,62 @@
+package pe.edu.upc.controller;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.support.SessionStatus;
+
+import pe.edu.upc.entity.Tarjeta;
+import pe.edu.upc.serviceinterface.ITarjetaService;
+import pe.edu.upc.serviceinterface.IUsuarioService;
+
+@Controller
+@RequestMapping("/tarjetas")
+public class TarjetaController {
+
+	@Autowired
+	private ITarjetaService tS;
+
+	@Autowired
+	private IUsuarioService uS;
+
+	@GetMapping("/new")
+	public String newTarjeta(Model model) {
+		model.addAttribute("listaUsuarios", uS.listUsuario());
+		model.addAttribute("tarjeta", new Tarjeta());
+
+		return "tarjeta/tarjeta";
+
+	}
+
+	@PostMapping("/save")
+	public String saveTarjeta(@Valid Tarjeta tarjeta, BindingResult result, Model model, SessionStatus status)
+			throws Exception {
+
+		if (result.hasErrors()) {
+			return "tarjeta/tarjeta";
+		} else {
+			tS.insert(tarjeta);
+		}
+		model.addAttribute("listTarjetas", tS.list());
+		return "redirect:/tarjetas/list";
+
+	}
+
+	@GetMapping("/list")
+	public String listTarjetas(Model model) {
+		try {
+			model.addAttribute("listaTarjetas", tS.list());
+		} catch (Exception e) {
+			System.out.println("Error a listar tarjetas en el Controller");
+		}
+
+		return "tarjeta/listTarjeta";
+	}
+
+}
