@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,17 +26,28 @@ public class Opinion {
 	@Column(name = "numProductos", length = 40, nullable = false)
 	private float numProductos;
 
+	@ManyToOne
+	@JoinColumn(name = "idCliente")
+	private Cliente cliente;
+
+	@ManyToOne
+	@JoinColumn(name = "idLocal")
+	private Local local;
+
 	public Opinion() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Opinion(int idOpinion, String calificacion, String opinion, float numProductos) {
+	public Opinion(int idOpinion, String calificacion, String opinion, float numProductos, Cliente cliente,
+			Local local) {
 		super();
 		this.idOpinion = idOpinion;
 		this.calificacion = calificacion;
 		this.opinion = opinion;
 		this.numProductos = numProductos;
+		this.cliente = cliente;
+		this.local = local;
 	}
 
 	public int getIdOpinion() {
@@ -68,7 +81,22 @@ public class Opinion {
 	public void setNumProductos(float numProductos) {
 		this.numProductos = numProductos;
 	}
-	
-	
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public Local getLocal() {
+		return local;
+	}
+
+	public void setLocal(Local local) {
+		this.local = local;
+	}
+		
 	
 }
