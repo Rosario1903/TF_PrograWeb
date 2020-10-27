@@ -5,64 +5,52 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name = "ofertas")
-
+@Table(name = "Oferta")
 public class Oferta {
-	
-		@Id
-		@GeneratedValue(strategy = GenerationType.IDENTITY)
 
-		private int idOferta;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int idOferta;
 
-		@Column(name = "cantidadOferta", length = 40, nullable = false)
-		private String cantidadOferta;
-		private int idProducto;
+	@Column
+	private int cantidadOferta;
 
-		public Oferta() {
-			super();
-			// TODO Auto-generated constructor stub
-		}
+	@ManyToOne
+	@JoinColumn(name = "idProduct")
+	private Product producto;
 
-		public Oferta(int idOferta, String cantidadOferta, int idProducto) {
-			super();
-			this.idOferta = idOferta;
-			this.cantidadOferta = cantidadOferta;
-			this.idProducto = idProducto;
-			
-		}
-
-		public int getIdOferta() {
-			return idOferta;
-		}
-
-		public void setIdOferta(int idOferta) {
-			this.idOferta = idOferta;
-		}
-
-		public String getCantidadOferta() {
-			return cantidadOferta;
-		}
-
-		public void setCantidadOferta(String cantidadOferta) {
-			this.cantidadOferta = cantidadOferta;
-		}
-
-		public String getIdProducto() {
-			return idProducto;
-		}
-
-		public void setIdProducto(String idProducto) {
-			this.idProducto = idProducto;
-		}
-
-		
+	public Oferta() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
+
+	public int getIdOferta() {
+		return idOferta;
+	}
+
+	public void setIdOferta(int idOferta) {
+		this.idOferta = idOferta;
+	}
+
+	public int getCantidadOferta() {
+		return cantidadOferta;
+	}
+
+	public void setCantidadOferta(int cantidadOferta) {
+		this.cantidadOferta = cantidadOferta;
+	}
+
+	public Product getProducto() {
+		return producto;
+	}
+
+	public void setProducto(Product producto) {
+		this.producto = producto;
+	}
+
+}
