@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import pe.edu.upc.entity.Oferta;
 
 @Repository
-public interface OfertaRepository extends JpaRepository<Oferta, Integer>{
+public interface OfertaRepository extends JpaRepository<Oferta, Integer> {
 
 }
