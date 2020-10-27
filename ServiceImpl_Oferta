@@ -4,34 +4,29 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import pe.edu.upc.entity.Oferta;
 import pe.edu.upc.repository.OfertaRepository;
-import pe.edu.upc.serviceinterface.IOfertaervice;
+import pe.edu.upc.serviceinterface.IOfertaService;
 
 @Service
-public class OfertaServiceImpl implements IOfertaervice{
+public class OfertaServiceImpl implements IOfertaService {
 
 	@Autowired
-	private OfertaRepository cR;
-	
+	private OfertaRepository oR;
+
+	@Transactional
 	@Override
-	public void insert(Oferta ofe) {
-		try {
-			cR.save(ofe);
-			
-		} catch (Exception e) {
-			System.out.println("Error en el serviceimpl Cliente");
-		}
-		
+	public void insert(Oferta ofert) {
+		oR.save(ofert);
+
 	}
 
 	@Override
-	public List<Oferta> listOferta() {
+	public List<Oferta> list() {
 		// TODO Auto-generated method stub
-		return cR.findAll();
+		return oR.findAll();
 	}
 
-	
-	
 }
