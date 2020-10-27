@@ -3,38 +3,53 @@ package pe.edu.upc.entity;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+@Entity
+@Table(name = "Tarjeta")
 public class Tarjeta {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public int idTarjeta;
-	
-	private int numTarjeta;
-	
-	private int cciTarjeta;	
-	
-	@Column(name="name",nullable=false,length = 45)
-	private String nameTarjeta;
-	
-	@Column(name="ExDate")
-	private Date ExDate;
+	private int idTarjeta;
+
+	@NotNull(message = "El numero de la Tarjeta es Obligatorio")
+	@Column(name = "numeroTarjeta")
+	private int numeroTarjeta;
+
+	@NotNull(message = "El CCI de la Tarjeta es Obligatorio")
+	@Column(name = "cciTarjeta")
+	private int cciTarjeta;
+
+	@NotNull(message = "El Nombre del Titular de la Tarjeta es Obligatorio")
+	@Column(name = "nombredeltitularTarjeta")
+	private String nombredeltitularTarjeta;
+
+	@NotNull(message = "La fecha es obligatoria")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "fechadeexpiracionTarjeta")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date fechadeexpiracionTarjeta;
+
+	@ManyToOne
+	@JoinColumn(name = "idUsuario")
+	private Usuario usuario;
 
 	public Tarjeta() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
-
-	public Tarjeta(int idTarjeta, int numTarjeta, int cciTarjeta, String nameTarjeta, Date exDate) {
-		super();
-		this.idTarjeta = idTarjeta;
-		this.numTarjeta = numTarjeta;
-		this.cciTarjeta = cciTarjeta;
-		this.nameTarjeta = nameTarjeta;
-		ExDate = exDate;
 	}
 
 	public int getIdTarjeta() {
@@ -45,12 +60,12 @@ public class Tarjeta {
 		this.idTarjeta = idTarjeta;
 	}
 
-	public int getNumTarjeta() {
-		return numTarjeta;
+	public int getNumeroTarjeta() {
+		return numeroTarjeta;
 	}
 
-	public void setNumTarjeta(int numTarjeta) {
-		this.numTarjeta = numTarjeta;
+	public void setNumeroTarjeta(int numeroTarjeta) {
+		this.numeroTarjeta = numeroTarjeta;
 	}
 
 	public int getCciTarjeta() {
@@ -61,22 +76,29 @@ public class Tarjeta {
 		this.cciTarjeta = cciTarjeta;
 	}
 
-	public String getNameTarjeta() {
-		return nameTarjeta;
+	public String getNombredeltitularTarjeta() {
+		return nombredeltitularTarjeta;
 	}
 
-	public void setNameTarjeta(String nameTarjeta) {
-		this.nameTarjeta = nameTarjeta;
+	public void setNombredeltitularTarjeta(String nombredeltitularTarjeta) {
+		this.nombredeltitularTarjeta = nombredeltitularTarjeta;
 	}
 
-	public Date getExDate() {
-		return ExDate;
+	public Date getFechadeexpiracionTarjeta() {
+		return fechadeexpiracionTarjeta;
 	}
 
-	public void setExDate(Date exDate) {
-		ExDate = exDate;
+	public void setFechadeexpiracionTarjeta(Date fechadeexpiracionTarjeta) {
+		this.fechadeexpiracionTarjeta = fechadeexpiracionTarjeta;
 	}
-	
-	
-	
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
 }
+
