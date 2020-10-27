@@ -1,25 +1,32 @@
 package pe.edu.upc.serviceimpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import pe.edu.upc.entity.Tarjeta;
 import pe.edu.upc.repository.TarjetaRepository;
 import pe.edu.upc.serviceinterface.ITarjetaService;
 
-public class TarjetaServiceImpl implements ITarjetaService{
-	
+@Service
+public class TarjetaServiceImpl implements ITarjetaService {
+
 	@Autowired
 	private TarjetaRepository tR;
-	
+
+	@Transactional
 	@Override
-	public void insert(Tarjeta tar) {
-		
-		try {
-			tR.save(tar);
-		} catch (Exception e) {
-			System.out.println("Error en el serviceimpl Tarjeta");
-		}
+	public void insert(Tarjeta tarj) {
+		tR.save(tarj);
+
 	}
 
-	
+	@Override
+	public List<Tarjeta> list() {
+		// TODO Auto-generated method stub
+		return tR.findAll();
+	}
+
 }
