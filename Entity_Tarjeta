@@ -12,8 +12,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -26,18 +27,18 @@ public class Tarjeta {
 	private int idTarjeta;
 
 	@NotNull(message = "El numero de la Tarjeta es Obligatorio")
-	@Column(name = "numeroTarjeta")
-	private int numeroTarjeta;
+	@Min(value = 16, message = "No se permite ingresar valores inferiores a 16")
+	private long numeroTarjeta;
 
 	@NotNull(message = "El CCI de la Tarjeta es Obligatorio")
-	@Column(name = "cciTarjeta")
-	private int cciTarjeta;
+	@Min(value = 20, message = "No se permite ingresar valores inferiores a 20")
+	private long cciTarjeta;
 
 	@NotNull(message = "El Nombre del Titular de la Tarjeta es Obligatorio")
 	@Column(name = "nombredeltitularTarjeta")
 	private String nombredeltitularTarjeta;
 
-	@NotNull(message = "La fecha es obligatoria")
+	@Future(message = "la fecha debe ser Futura")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "fechadeexpiracionTarjeta")
 	@Temporal(TemporalType.TIMESTAMP)
@@ -60,19 +61,19 @@ public class Tarjeta {
 		this.idTarjeta = idTarjeta;
 	}
 
-	public int getNumeroTarjeta() {
+	public long getNumeroTarjeta() {
 		return numeroTarjeta;
 	}
 
-	public void setNumeroTarjeta(int numeroTarjeta) {
+	public void setNumeroTarjeta(long numeroTarjeta) {
 		this.numeroTarjeta = numeroTarjeta;
 	}
 
-	public int getCciTarjeta() {
+	public long getCciTarjeta() {
 		return cciTarjeta;
 	}
 
-	public void setCciTarjeta(int cciTarjeta) {
+	public void setCciTarjeta(long cciTarjeta) {
 		this.cciTarjeta = cciTarjeta;
 	}
 
@@ -100,5 +101,6 @@ public class Tarjeta {
 		this.usuario = usuario;
 	}
 
-}
+	
 
+}
