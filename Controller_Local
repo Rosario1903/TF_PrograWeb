@@ -1,0 +1,59 @@
+package pe.edu.upc.controller;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.support.SessionStatus;
+
+import pe.edu.upc.entity.Local;
+import pe.edu.upc.serviceinterface.ILocalService;
+import pe.edu.upc.serviceinterface.IProveedorService;
+
+@Controller
+@RequestMapping("/locals")
+public class LocalController {
+
+	@Autowired
+	private ILocalService lS;
+	
+	@Autowired
+	private IProveedorService pS;
+	
+	@GetMapping("/new")
+	public String newLocal(Model model) {
+		model.addAttribute("listaProveedores", pS.listProveedor());
+		model.addAttribute("local", new Local());
+		return "local/local";
+	}
+	
+	@PostMapping("/save")
+	public String saveLocal(@Valid Local local, BindingResult result, Model model, SessionStatus status)
+			throws Exception {
+		if (result.hasErrors()) {
+			return "local/local";
+		} else {
+			lS.insert(local);
+		}
+		model.addAttribute("listaLocales", lS.list());
+		return "redirect:/locals/list"; /*ruta vista,"redirect" llama a los controllers */
+	}
+	
+	@GetMapping("/list")
+	public String listLocals(Model model) {
+		try {
+			model.addAttribute("local", new Local());
+			
+			model.addAttribute("listaLocales", lS.list()); /*"listaLocales" en listLocal linea 142 mismo nombre */
+		} catch (Exception e) {
+			System.out.println("Error al listar locales en el controller");
+		}
+		return "local/listLocal";
+		
+	}
+}
