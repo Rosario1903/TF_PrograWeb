@@ -43,7 +43,8 @@ public class TarjetaController {
 		} else {
 			tS.insert(tarjeta);
 		}
-		model.addAttribute("listTarjetas", tS.list());
+
+		model.addAttribute("listaTarjetas", tS.list());
 		return "redirect:/tarjetas/list";
 
 	}
@@ -51,6 +52,7 @@ public class TarjetaController {
 	@GetMapping("/list")
 	public String listTarjetas(Model model) {
 		try {
+			model.addAttribute("tarjeta", new Tarjeta());
 			model.addAttribute("listaTarjetas", tS.list());
 		} catch (Exception e) {
 			System.out.println("Error a listar tarjetas en el Controller");
