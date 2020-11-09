@@ -1,8 +1,16 @@
 package pe.edu.upc.repository;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import pe.edu.upc.entity.Distribucion;
+
 @Repository
 public interface DistribucionRepository extends JpaRepository<Distribucion, Integer> {
-
+	@Query("from Distribucion d where d.tipoDistribucion like %:name%")
+	List<Distribucion>findBynameDistibucion(@Param("name")String tipoDis);
+	
 }
+
