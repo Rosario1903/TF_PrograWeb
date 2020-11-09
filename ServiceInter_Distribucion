@@ -1,7 +1,15 @@
 package pe.edu.upc.serviceinterface;
 import java.util.List;
+import java.util.Optional;
+
 import pe.edu.upc.entity.Distribucion;
+
+
 
 public interface IDistribucionService {
 	public void insert(Distribucion dis);
 	List<Distribucion>list();
+	List<Distribucion>findBytipo(String tipoDis);
+	public void delete(int idDistribucion);
+	Optional<Distribucion>searchId(int idDis);
+}
