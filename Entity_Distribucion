@@ -1,3 +1,4 @@
+
 package pe.edu.upc.entity;
 import java.util.Date;
 
@@ -9,8 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -22,22 +23,23 @@ public class Distribucion {
 	private int idDistribucion;
 	@Column(name = "tipoDistribucion", length = 40, nullable = false)
 	private String tipoDistribucion;
-	@NotNull(message = "la fecha es obligatoria")
-	@Past(message = "La fecha debe ser pasada")
+	
+	
+	@Future(message = "La fecha debe ser futura")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Column(name = "dateLaboratory")
+	@Column(name = "dateDistribucion")
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date dateLaboratory;
+	private Date dateDistribucion;
 	public Distribucion() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public Distribucion(int idDistribucion, String tipoDistribucion,
-			@NotNull(message = "la fecha es obligatoria") @Past(message = "La fecha debe ser pasada") Date dateLaboratory) {
+			@NotNull(message = "la fecha es obligatoria") @Future(message = "La fecha debe ser futura") Date dateDistribucion) {
 		super();
 		this.idDistribucion = idDistribucion;
 		this.tipoDistribucion = tipoDistribucion;
-		this.dateLaboratory = dateLaboratory;
+		this.dateDistribucion = dateDistribucion;
 	}
 	public int getIdDistribucion() {
 		return idDistribucion;
@@ -51,12 +53,13 @@ public class Distribucion {
 	public void setTipoDistribucion(String tipoDistribucion) {
 		this.tipoDistribucion = tipoDistribucion;
 	}
-	public Date getDateLaboratory() {
-		return dateLaboratory;
+	public Date getDateDistribucion() {
+		return dateDistribucion;
 	}
-	public void setDateLaboratory(Date dateLaboratory) {
-		this.dateLaboratory = dateLaboratory;
+	public void setDateDistribucion(Date dateDistribucion) {
+		this.dateDistribucion = dateDistribucion;
 	}
+	
 	
 	
 }
