@@ -1,11 +1,19 @@
 package pe.edu.upc.serviceinterface;
 
 import java.util.List;
+import java.util.Optional;
 
 import pe.edu.upc.entity.Cliente;
 
-public interface IClienteService {
 
-	public void insert(Cliente cli);
-	List<Cliente> listCliente();
+
+public interface IClienteService {
+	
+	public int insert(Cliente cli);
+	public List<Cliente>listCliente();
+	
+	List<Cliente>findBydni(int dni);
+	public void delete(int idCliente);
+	Optional<Cliente>searchId(int idCliente);
+	
 }
