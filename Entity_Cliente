@@ -5,32 +5,40 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
 
 @Entity
 @Table(name = "Clientes")
 
 public class Cliente {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
 	private int idCliente;
 	
-	@Column(name = "dni", length = 7, nullable = false)
-	@NotNull(message = "El dni es obligatorio")
+	
+	@Column(name = "dni", length = 14, nullable = false)
 	private int dni;
 	
+	@ManyToOne
+	@JoinColumn(name = "idUsuario")
+	private Usuario usuario;
+	private String foto;
 	public Cliente() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	public Cliente(int idCliente, int dni) {
+
+	public Cliente(int idCliente, @NotNull(message = "El dni es obligatorio") int dni, Usuario usuario,String foto) {
 		super();
 		this.idCliente = idCliente;
 		this.dni = dni;
+		this.usuario = usuario;
+		this.foto=foto;
 	}
 
 	public int getIdCliente() {
@@ -48,7 +56,22 @@ public class Cliente {
 	public void setDni(int dni) {
 		this.dni = dni;
 	}
-	
-	
 
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	} 
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+	
+	
 }
+
