@@ -30,4 +30,16 @@ public class ProductServiceImpl implements IProductService {
 		return lR.findAll();
 	}
 
+@Override
+	public List<Product> findBymodelProduct(String modelProduct) {
+		// TODO Auto-generated method stub
+		return lR.findBymodelProduct(modelProduct);
+	}
+		
+	@Override
+	public void delete(int idProduct) {
+		// TODO Auto-generated method stub
+		lR.deleteById(idProduct);
+	}
+
 }
