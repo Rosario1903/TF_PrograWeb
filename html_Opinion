@@ -31,7 +31,7 @@
 
 		<!-- Sidebar -->
 		<ul
-			class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+			class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion"
 			id="accordionSidebar">
 
 			<!-- Sidebar - Brand -->
@@ -57,10 +57,82 @@
 				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
 					data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/usuarios/list}">Usuarios</a>
+					</div>
+				</div>
+
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/clientes/list}">Clientes</a>
+					</div>
+				</div>
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/proveedores/list}">Proveedores</a>
+					</div>
+				</div>
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/products/list}">Productos</a>
+					</div>
+				</div>
+
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/productsxsuppliers/list}">Productos
+							por Proveedores</a>
+					</div>
+				</div>
+
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/reservations/list}">Reservas</a>
+					</div>
+				</div>
+
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/descuentos/list}">Descuentos</a>
+					</div>
+				</div>
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/distribuciones/list}">Distribuciones</a>
+					</div>
+				</div>
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/locals/list}">Locales</a>
+					</div>
+				</div>
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
 						<a class="collapse-item" th:href="@{/opinions/list}">Opiniones</a>
 					</div>
 				</div>
-			</li>
+
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/ofertas/list}">Oferta</a>
+					</div>
+				</div>
+
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/tarjetas/list}">Tarjeta</a>
+					</div>
+				</div></li>
 
 			<!-- Divider -->
 			<hr class="sidebar-divider">
@@ -120,13 +192,13 @@
 
 					<form th:action="@{/opinions/save}" th:object="${opinion}"
 						method="post">
-					<div class="form-group row">
+						<div class="form-group row">
 							<label for="category">Cliente:</label>
 							<div class="col-sm-6">
-								<select class="form-control"
+								<select class="form-control" required="required"
 									th:field="*{cliente.idCliente}">
-									<option th:each="c: ${listaClientes}"
-										th:value="${c.idCliente}" th:text="${c.dni}"
+									<option th:each="c: ${listaClientes}" th:value="${c.idCliente}"
+										th:text="${c.dni}"
 										th:selected="(${c.idCliente} == *{cliente.idCliente})"></option>
 								</select>
 							</div>
@@ -134,20 +206,30 @@
 						<div class="form-group row">
 							<label for="category">Local:</label>
 							<div class="col-sm-6">
-								<select class="form-control"
+								<select class="form-control" required="required"
 									th:field="*{local.idLocal}">
-									<option th:each="l: ${listaLocales}"
-										th:value="${l.idLocal}" th:text="${l.nameLocal}"
-										th:selected="(${c.idLocal} == *{local.idLocal})"></option>
+									<option th:each="l: ${listaLocales}" th:value="${l.idLocal}"
+										th:text="${l.nameLocal}"
+										th:selected="(${l.idLocal} == *{local.idLocal})"></option>
 								</select>
 							</div>
 						</div>
-						
 						<div class="form-group row">
-							<label for="calificacion" class="col-sm-2 col-form-label">Calificacion</label>
+							<label for="category">Modelo de Producto:</label>
+							<div class="col-sm-6">
+								<select class="form-control" required="required"
+									th:field="*{product.idProduct}">
+									<option th:each="l: ${listaProductos}"
+										th:value="${l.idProduct}" th:text="${l.modelProduct}"
+										th:selected="(${l.idProduct} == *{product.idProduct})"></option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="calificacion" class="col-sm-2 col-form-label">Opinion</label>
 							<div class="col-sm-6">
 								<input type="text" th:field="*{calificacion}"
-									class="form-control"
+									class="form-control" required="required"
 									th:errorclass="'form-control alert-danger'" /> <small
 									class="form-text text-danger"
 									th:if="${#fields.hasErrors('calificacion')}"
@@ -156,14 +238,12 @@
 						</div>
 
 						<div class="form-group row">
-							<label for="opinion" class="col-sm-2 col-form-label">Opinion</label>
+							<label for="opinion" class="col-sm-2 col-form-label">Calificacion</label>
 							<div class="col-sm-6">
-								<input type="text" th:field="*{opinion}"
-									class="form-control"
-									th:errorclass="'form-control alert-danger'" /> <small
-									class="form-text text-danger"
-									th:if="${#fields.hasErrors('opinion')}"
-									th:errors="*{opinion}"></small>
+								<input type="text" th:field="*{opinion}" class="form-control"
+									required="required" th:errorclass="'form-control alert-danger'" />
+								<small class="form-text text-danger"
+									th:if="${#fields.hasErrors('opinion')}" th:errors="*{opinion}"></small>
 							</div>
 						</div>
 						<div class="form-group row">
