@@ -1,15 +1,21 @@
 package pe.edu.upc.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
+
+import com.sun.el.parser.ParseException;
 
 import pe.edu.upc.entity.Product;
 import pe.edu.upc.serviceinterface.IProductService;
@@ -28,26 +34,60 @@ public class ProductController {
 	}
 
 	@PostMapping("/save")
-	public String saveProduct(@Valid Product product, BindingResult result, Model model,
-			SessionStatus status)
-	throws Exception{
-	if(result.hasErrors()) {
-	return "product/product"	;
-	}
-	else {
-	lS.insert(product);
-	}	
-	model.addAttribute("listaProductos",lS.list());
-	return"/product/listProduct";
+	public String saveProduct(@Valid Product product, BindingResult result, Model model, SessionStatus status)
+			throws Exception {
+		if (result.hasErrors()) {
+			return "product/product";
+		} else {
+			lS.insert(product);
+		}
+		model.addAttribute("listaProductos", lS.list());
+		return "/product/listProduct";
 	}
 
 	@GetMapping("/list")
 	public String listLaboratories(Model model) {
 		try {
-			model.addAttribute("listProductos", lS.list());
+			model.addAttribute("product", new Product());
+
+			model.addAttribute("listaProductos", lS.list());
 		} catch (Exception e) {
 			System.out.println("Error al listar en el controller");
 		}
 		return "product/listProduct";
 	}
+
+	@RequestMapping("/find")
+	public String findProduct(Model model, @Validated Product product) throws ParseException {
+		List<Product> listaProductos;
+		listaProductos = lS.findBymodelProduct(product.getModelProduct());
+
+		if (listaProductos.isEmpty()) {
+			model.addAttribute("mensaje", "No se encontró");
+		}
+		model.addAttribute("listaProductos", listaProductos);
+		return "product/listProduct";
+
+	}
+
+	@RequestMapping("/delete/{id}")
+	public String deleteProduct(Model model,
+			@PathVariable(value = "id") int id) { /* @PathVariable -> agregar una variable como parámetro */
+		try {
+			if (id > 0) {
+				lS.delete(id);
+			}
+			model.addAttribute("product", new Product());
+			model.addAttribute("mensaje", "Se eliminó correctamente!");
+			model.addAttribute("listaProductos", lS.list());
+		} catch (Exception e) {
+			model.addAttribute("product", new Product());
+			model.addAttribute("mensaje", "No se puede eliminar!");
+			model.addAttribute("listaProductos", lS.list());
+
+		}
+
+		return "product/listProduct";
+	}
+
 }
