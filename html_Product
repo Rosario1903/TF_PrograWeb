@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>2020-02</title>
+<title>Insta-Shoes</title>
 
 <!-- Custom fonts for this template-->
 <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
@@ -31,17 +31,17 @@
 
 		<!-- Sidebar -->
 		<ul
-			class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+			class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion"
 			id="accordionSidebar">
 
 			<!-- Sidebar - Brand -->
 			<a
 				class="sidebar-brand d-flex align-items-center justify-content-center"
-				th:href="@{/products/list}">
+				th:href="@{/products/index}">
 				<div class="sidebar-brand-icon rotate-n-15">
 					<i class="fas fa-leaf"></i>
 				</div>
-				<div class="sidebar-brand-text mx-3">App</div>
+				<div class="sidebar-brand-text mx-3">Insta-Shoes</div>
 			</a>
 
 			<!-- Divider -->
@@ -49,22 +49,90 @@
 
 
 
-
 			<!-- Nav Item - Pages Collapse Menu -->
 			<li class="nav-item"><a class="nav-link collapsed" href="#"
-				data-target="#collapseTwo" aria-expanded=true
+				data-target="#collapseTwo" aria-expanded="false"
 				aria-controls="collapseTwo"> <i class="fas fa-fw fa-cog"></i> <span>Men&uacute;</span>
 			</a>
 				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
 					data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
-						<a class="collapse-item" th:href="@{/laboratories/list}">Productos</a>
+						<a class="collapse-item" th:href="@{/usuarios/list}">Usuarios</a>
 					</div>
+				</div>
+
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
-						<a class="collapse-item" th:href="@{/vaccines/list}">-</a>
+						<a class="collapse-item" th:href="@{/clientes/list}">Clientes</a>
+					</div>
+				</div>
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/proveedores/list}">Proveedores</a>
+					</div>
+				</div>
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/products/list}">Productos</a>
+					</div>
+				</div>
+
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/productsxsuppliers/list}">Productos
+							por Proveedores</a>
+					</div>
+				</div>
+
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/reservations/list}">Reservas</a>
+					</div>
+				</div>
+
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/descuentos/list}">Descuentos</a>
+					</div>
+				</div>
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/distribuciones/list}">Distribuciones</a>
+					</div>
+				</div>
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/locals/list}">Locales</a>
+					</div>
+				</div>
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/opinions/list}">Opiniones</a>
+					</div>
+				</div>
+
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/ofertas/list}">Oferta</a>
+					</div>
+				</div>
+
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/tarjetas/list}">Tarjeta</a>
 					</div>
 				</div></li>
-
 
 
 			<!-- Divider -->
@@ -104,19 +172,6 @@
 							role="button" data-toggle="dropdown" aria-haspopup="true"
 							aria-expanded="false"> <i class="fas fa-search fa-fw"></i>
 						</a></li>
-
-
-
-						<!-- Nav Item - User Information -->
-						<li class="nav-item dropdown no-arrow"><a
-							class="nav-link dropdown-toggle" href="#" id="userDropdown"
-							role="button" data-toggle="dropdown" aria-haspopup="true"
-							aria-expanded="false"> <span
-								class="mr-2 d-none d-lg-inline text-gray-600 small"><img
-									th:src="@{/img/logout.png}" width="30" height="30" alt="logo"
-									align="middle"></img></span>
-						</a> <!-- Dropdown - User Information --></li>
-
 					</ul>
 
 				</nav>
@@ -126,40 +181,96 @@
 				<div class="container-fluid">
 
 					<!-- Page Heading -->
-					<h1 class="h3 mb-4 text-gray-800">Productos</h1>
-
-					<a th:href="@{/products/new/}" class="btn btn-secondary btn-xs">Nuevo</a>
+					<h1 class="h3 mb-4 text-gray-800">Producto</h1>
 
 					<hr class="sidebar-divider">
+					<div th:object="${product}" th:remove="tag">
+						<ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger"
+							role="alert">
+							<li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+						</ul>
+					</div>
 
-					<table class="table table-striped">
-						<thead class="thead-dark">
-							<tr>
-								<th scope="col">Id</th>
-								<th scope="col">Modelo</th>
-								<th scope="col">Marca</th>
-								<th scope="col">Talla</th>
-								<th scope="col">Tipo</th>
-								<th scope="col">Precio</th>
-								<th scope="col">Color</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="l: ${listaProductos}">
-								<td th:text="${l.idProduct}"></td>
-								<td th:text="${l.modelProduct}"></td>
-								<td th:text="${l.markProduct}"></td>
-								<td th:text="${l.sizeProduct}"></td>
-								<td th:text="${l.typeProduct}"></td>
-								<td th:text="${l.priceProduct}"></td>
-								<td th:text="${l.colourProduct}"></td>
+					<form th:action="@{/products/save}" th:object="${product}"
+						method="post">
+						<div class="form-group row">
+							<label for="modelProduct" class="col-sm-2 col-form-label">Modelo</label>
+							<div class="col-sm-6">
+								<input type="text" th:field="*{modelProduct}"
+									class="form-control" required="required"
+									th:errorclass="'form-control alert-danger'" /> <small
+									class="form-text text-danger"
+									th:if="${#fields.hasErrors('modelProduct')}"
+									th:errors="*{modelProduct}"></small>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="markProduct" class="col-sm-2 col-form-label">Marca</label>
+							<div class="col-sm-6">
+								<input type="text" th:field="*{markProduct}"
+									class="form-control" required="required"
+									th:errorclass="'form-control alert-danger'" /> <small
+									class="form-text text-danger"
+									th:if="${#fields.hasErrors('markProduct')}"
+									th:errors="*{markProduct}"></small>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="sizeProduct" class="col-sm-2 col-form-label">Tamaño</label>
+							<div class="col-sm-6">
+								<input type="number" th:field="*{sizeProduct}" min="30" max="45"
+									class="form-control" required="required"
+									th:errorclass="'form-control alert-danger'" /> <small
+									class="form-text text-danger"
+									th:if="${#fields.hasErrors('sizeProduct')}"
+									th:errors="*{sizeProduct}"></small>
+							</div>
+
+						</div>
+						<div class="form-group row">
+							<label for="typeProduct" class="col-sm-2 col-form-label">Tipo</label>
+							<div class="col-sm-6">
+								<input type="text" th:field="*{typeProduct}"
+									class="form-control" required="required"
+									th:errorclass="'form-control alert-danger'" /> <small
+									class="form-text text-danger"
+									th:if="${#fields.hasErrors('typeProduct')}"
+									th:errors="*{typeProduct}"></small>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="priceProduct" class="col-sm-2 col-form-label">Precio</label>
+							<div class="col-sm-6">
+								<input type="text" th:field="*{priceProduct}" min="50"	max="1000" 
+								class="	form-control" required="required"
+											th:errorclass="'form-control alert-danger'" /> <small
+									class="form-text text-danger"
+									th:if="${#fields.hasErrors('priceProduct')}"
+									th:errors="*{priceProduct}"></small>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="colourProduct" class="col-sm-2 col-form-label">Color</label>
+							<div class="col-sm-6">
+								<input type="text" th:field="*{colourProduct}"
+									class="form-control" required="required"
+									th:errorclass="'form-control alert-danger'" /> <small
+									class="form-text text-danger"
+									th:if="${#fields.hasErrors('colourProduct')}"
+									th:errors="*{colourProduct}"></small>
+							</div>
+
+							<div class="form-group row">
+								<div class="col-sm-6">
+									<input type="submit" value="Guardar" class="btn btn-secondary"></input>
+									<a href="/products/list" class="btn btn-danger">Cancelar</a>
+								</div>
+							</div>
+							<p th:text="${mensaje}" class="form-text text-danger"></p>
+					</form>
 
 
-							</tr>
-						</tbody>
-					</table>
 
-					<p th:text="${mensaje}"></p>
 
 				</div>
 				<!-- /.container-fluid -->
@@ -171,7 +282,7 @@
 			<footer class="sticky-footer bg-white">
 				<div class="container my-auto">
 					<div class="copyright text-center my-auto">
-						<span>Copyright &copy; Web 202002</span>
+						<span>Copyright &copy; Web 2019</span>
 					</div>
 				</div>
 			</footer>
@@ -188,7 +299,30 @@
 		class="fas fa-angle-up"></i>
 	</a>
 
-
+	<!-- Logout Modal-->
+	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">¿Listo para
+						salir?</h5>
+					<button class="close" type="button" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">Seleccione "Cerrar sesión" a
+					continuación si está listo para finalizar su sesión actual</div>
+				<div class="modal-footer">
+					<button class="btn btn-secondary" type="button"
+						data-dismiss="modal">Cancelar</button>
+					<a class="btn btn-primary" th:href="@{/categories/index}">Cerrar
+						Sesión</a>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<!-- Bootstrap core JavaScript-->
 	<script src="/vendor/jquery/jquery.min.js"></script>
@@ -203,3 +337,4 @@
 </body>
 
 </html>
+
