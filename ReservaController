@@ -1,0 +1,19 @@
+@RequestMapping("/find")
+	public String findReserva(Map<String, Object> model, @ModelAttribute Usuario usuario) throws ParseException {
+		List<Reserva> listaReserva;
+		usuario.setNombreUsuario(usuario.getNombreUsuario());
+		listaReserva = rS.findByClienteUsuarioNombreUsuario(usuario.getNombreUsuario());
+
+		if (listaReserva.isEmpty()) {
+			model.put("mensaje", "No se encontró");
+		}
+		model.put("listaReserva", listaReserva );
+		return "reserva/listReserva";
+
+	}
+	
+	@ModelAttribute("usuario")
+	public Usuario createModel() {
+	    return new Usuario();
+	}
+	
