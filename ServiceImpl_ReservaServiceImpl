@@ -1,0 +1,5 @@
+@Override
+	public List<Reserva> findByClienteUsuarioNombreUsuario(String nombreUsuario) {
+		// TODO Auto-generated method stub
+		return rR.findByClienteUsuarioNombreUsuario(nombreUsuario);
+	}
