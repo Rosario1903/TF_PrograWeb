@@ -236,6 +236,7 @@
 								<th scope="col">Precio</th>
 								<th scope="col">Color</th>
 								<th scope="col">Operación</th>
+								<th scope="col">Actualizar</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -250,6 +251,9 @@
 								<td><a th:href="@{'/products/delete/'+${l.idProduct}}">
 										<i class="iconf fa fa-trash" style="color: green;"></i>
 								</a></td>
+								<td><a
+									th:href="@{'/products/irupdate/'+${l.idProduct}}"><i
+										class="iconf fa fa-pen" style="color: green;"></i></a></td>
 
 
 							</tr>
