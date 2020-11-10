@@ -1,21 +1,27 @@
 package pe.edu.upc.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.sun.el.parser.ParseException;
 
 import pe.edu.upc.entity.Opinion;
 import pe.edu.upc.serviceinterface.IClienteService;
 import pe.edu.upc.serviceinterface.ILocalService;
 import pe.edu.upc.serviceinterface.IOpinionService;
+import pe.edu.upc.serviceinterface.IProductService;
 
 @Controller
 @RequestMapping("/opinions")
@@ -29,11 +35,15 @@ public class OpinionController {
 	
 	@Autowired
 	private ILocalService lS;
+
+	@Autowired
+	private IProductService pdS;
 	
 	@GetMapping ("/new")
 	public String newOpinion(Model model) {
-		model.addAttribute("listaClientes", cS.listCliente());/*listCliente de IClienteService */
-		model.addAttribute("listaLocales", lS.list());/*list de ILocalService */
+		model.addAttribute("listaClientes", cS.listCliente());
+		model.addAttribute("listaLocales", lS.list());
+		model.addAttribute("listaProductos", pdS.list());
 		model.addAttribute("opinion", new Opinion());
 		return "opinion/opinion";
 	}
@@ -42,6 +52,9 @@ public class OpinionController {
 	public String saveOpinion(@Valid Opinion opinion, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
 		if (result.hasErrors()) {
+			model.addAttribute("listaClientes", cS.listCliente());
+			model.addAttribute("listaLocales", lS.list());
+			model.addAttribute("listaProductos", pdS.list());
 			return "opinion/opinion";
 		} else {
 			oS.insert(opinion);
@@ -54,6 +67,9 @@ public class OpinionController {
 	@GetMapping("/list")
 	public String listOpinions(Model model) {
 		try {
+			
+			model.addAttribute("opinion", new Opinion());
+			
 			model.addAttribute("listaOpiniones", oS.list());
 		} catch (Exception e) {
 			System.out.println("Error al listar en el controller");
@@ -61,4 +77,37 @@ public class OpinionController {
 		return "opinion/listOpinion";
 		
 	}
+
+@RequestMapping("/find")
+	public String findOpinion(Model model, @Validated Opinion opinion) throws ParseException {
+		List<Opinion> listaOpiniones;
+		listaOpiniones = oS.findBycalificacion(opinion.getCalificacion());
+				
+		if (listaOpiniones.isEmpty()) {
+			model.addAttribute("mensaje", "No se encontró");
+		}
+		model.addAttribute("listaOpiniones", listaOpiniones);
+		return "opinion/listOpinion";
+
+	}
+	
+	@RequestMapping("/delete/{id}")
+	public String deleteOpinion (Model model, @PathVariable(value="id") int id) { /*@PathVariable -> agregar una variable como parámetro*/
+	try {
+		if(id > 0) {
+			oS.delete(id);
+		}
+		model.addAttribute("opinion", new Opinion());
+		model.addAttribute("mensaje", "Se eliminó correctamente!");
+		model.addAttribute("listaOpiniones", oS.list());		
+	} catch (Exception e) {
+		model.addAttribute("opinion", new Opinion());
+		model.addAttribute("mensaje", "Se eliminó correctamente!");
+		model.addAttribute("listaOpiniones", oS.list());	
+		
+	}
+		
+		return "opinion/listOpinion";
+	}
+
 }
