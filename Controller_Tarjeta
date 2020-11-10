@@ -1,5 +1,8 @@
 package pe.edu.upc.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,11 +10,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.sun.el.parser.ParseException;
+
 import pe.edu.upc.entity.Tarjeta;
+import pe.edu.upc.entity.Usuario;
 import pe.edu.upc.serviceinterface.ITarjetaService;
 import pe.edu.upc.serviceinterface.IUsuarioService;
 
@@ -39,6 +47,7 @@ public class TarjetaController {
 			throws Exception {
 
 		if (result.hasErrors()) {
+			model.addAttribute("listaUsuarios", uS.listUsuario());
 			return "tarjeta/tarjeta";
 		} else {
 			tS.insert(tarjeta);
@@ -60,5 +69,45 @@ public class TarjetaController {
 
 		return "tarjeta/listTarjeta";
 	}
+	
+	@RequestMapping("/delete/{id}")
+	public String deleteTarjeta(Model model, @PathVariable(value = "id") int id) {
+		try {
+			if (id > 0) {
+				tS.delete(id);
+			}
+			model.addAttribute("tarjeta", new Tarjeta());
+
+			model.addAttribute("mensaje", "Se eliminó correctamente!");
+			model.addAttribute("listaTarjetas", tS.list());
+		} catch (Exception e) {
+			model.addAttribute("mensaje", "No se puede eliminar!!");
+			model.addAttribute("listaTarjetas", tS.list());
+
+		}
+
+		return "tarjeta/listTarjeta";
+
+	}
+	
+	@RequestMapping("/find")
+	public String findTarjeta(Map<String, Object> model, @ModelAttribute Usuario usuario) throws ParseException {
+		List<Tarjeta> listaTarjetas;
+		usuario.setNombreUsuario(usuario.getNombreUsuario());
+		listaTarjetas = tS.findByUsuarioNombreUsuario(usuario.getNombreUsuario());
+
+		if (listaTarjetas.isEmpty()) {
+			model.put("mensaje", "No se encontró");
+		}
+		model.put("listaTarjetas", listaTarjetas );
+		return "tarjeta/listTarjeta";
+
+	}
+	
+	@ModelAttribute("usuario")
+	public Usuario createModel() {
+	    return new Usuario();
+	}
+	
 
 }
