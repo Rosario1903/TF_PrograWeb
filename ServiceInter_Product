@@ -7,4 +7,8 @@ import pe.edu.upc.entity.Product;
 public interface IProductService {
 public void insert(Product lab);
 List<Product>list();
+
+List<Product> findBymodelProduct(String modelProduct);
+public void delete (int idProduct);
 }
+
