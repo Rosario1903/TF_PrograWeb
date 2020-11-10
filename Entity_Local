@@ -5,7 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 
 @Entity
@@ -14,46 +19,88 @@ public class Local {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idLocal;
+	@NotNull(message = "El campo es obligatorio")
 	@Column(name = "nameLocal", length = 40, nullable = false)
 	private String nameLocal;
+	@NotNull(message = "El campo es obligatorio")
 	@Column(name = "adressLocal", length = 60, nullable = false)
 	private String adressLocal;
+	
+	@NotNull(message = "El campo es obligatorio")
 	@Column(name = "numberproLocal", length = 60, nullable = false)
-	private String numberproLocal;
+	@Positive
+	@Min(value = 30, message = "No puede tener menos de 30 productos")
+	private int numberproLocal;
+	
+	@ManyToOne
+	@JoinColumn(name = "idProveedor")
+	private Proveedor proveedor;
+	private String foto;
+
 	public Local() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Local(int idLocal, String nameLocal, String adressLocal, String numberproLocal) {
+
+	public Local(int idLocal, @NotNull(message = "El campo es obligatorio") String nameLocal,
+			@NotNull(message = "El campo es obligatorio") String adressLocal,
+			@NotNull(message = "El campo es obligatorio") @Positive @Min(value = 30, message = "No puede tener menos de 30 productos") int numberproLocal,
+			Proveedor proveedor, String foto) {
 		super();
 		this.idLocal = idLocal;
 		this.nameLocal = nameLocal;
 		this.adressLocal = adressLocal;
 		this.numberproLocal = numberproLocal;
+		this.proveedor = proveedor;
+		this.foto = foto;
+	}
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}
 	public int getIdLocal() {
 		return idLocal;
 	}
+
 	public void setIdLocal(int idLocal) {
 		this.idLocal = idLocal;
 	}
+
 	public String getNameLocal() {
 		return nameLocal;
 	}
+
 	public void setNameLocal(String nameLocal) {
 		this.nameLocal = nameLocal;
 	}
+
 	public String getAdressLocal() {
 		return adressLocal;
 	}
+
 	public void setAdressLocal(String adressLocal) {
 		this.adressLocal = adressLocal;
 	}
-	public String getNumberproLocal() {
+
+	public int getNumberproLocal() {
 		return numberproLocal;
 	}
-	public void setNumberproLocal(String numberproLocal) {
+
+	public void setNumberproLocal(int numberproLocal) {
 		this.numberproLocal = numberproLocal;
 	}
+
+	public Proveedor getProveedor() {
+		return proveedor;
+	}
+
+	public void setProveedor(Proveedor proveedor) {
+		this.proveedor = proveedor;
+	}
+	
+	
 	
 }
