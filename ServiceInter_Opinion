@@ -8,4 +8,6 @@ public interface IOpinionService {
 	public void insert(Opinion opi);
 
 	List<Opinion> list();
+	 List<Opinion> findBycalificacion(String calificacion);
+	 public void delete (int idOpinion);
 }
