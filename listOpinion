@@ -205,7 +205,7 @@
 											class="col-sm-2 col-form-label">Buscar:</label></td>
 										<td><input type="text" class="form-control"
 											th:field="*{calificacion}" id="calificacion"
-											placeholder="Calificacion" required="required"></input></td>
+											placeholder="Opinion" required="required"></input></td>
 										<td><button type="submit" class="btn btn-success">
 												<i class="iconf fa fa-search" style="color: white;"></i>
 											</button></td>
@@ -229,6 +229,7 @@
 								<th scope="col">Opinion</th>
 								<th scope="col">Calificacion</th>
 								<th scope="col">Operación</th>
+								<th scope="col">Actualizar</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -242,6 +243,10 @@
 								<td><a th:href="@{'/opinions/delete/'+${o.idOpinion}}">
 										<i class="iconf fa fa-trash" style="color: green;"></i>
 								</a></td>
+									<td><a
+									th:href="@{'/opinions/irupdate/'+${o.idOpinion}}"><i
+										class="iconf fa fa-pen" style="color: green;"></i></a></td>
+								
 							</tr>
 						</tbody>
 					</table>
