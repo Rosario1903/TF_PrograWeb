@@ -8,6 +8,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 
 @Entity
 @Table(name= "opiniones")
@@ -16,15 +20,18 @@ public class Opinion {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idOpinion;
-		
+	@NotNull(message = "El campo es obligatorio")
+	
 	@Column(name = "calificacion", length = 40, nullable = false)
 	private String calificacion;
-
-	@Column(name = "opinion", length = 40, nullable = false)
-	private String opinion;
 	
-	@Column(name = "numProductos", length = 40, nullable = false)
-	private float numProductos;
+	@NotNull(message = "El campo es obligatorio")
+	@Column(name = "opinion", length = 40, nullable = false)
+	@Min(value = 1, message = "La calificacion varia entre 1 y 5")
+	@Max(value = 5, message = "La calificacion varia entre 1 y 5")
+	private int opinion;
+	
+	
 
 	@ManyToOne
 	@JoinColumn(name = "idCliente")
@@ -33,21 +40,25 @@ public class Opinion {
 	@ManyToOne
 	@JoinColumn(name = "idLocal")
 	private Local local;
+	
+	@ManyToOne
+	@JoinColumn(name = "idProduct")
+	private Product product;
 
 	public Opinion() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Opinion(int idOpinion, String calificacion, String opinion, float numProductos, Cliente cliente,
-			Local local) {
+	public Opinion(int idOpinion,String calificacion, int opinion,
+			Cliente cliente, Local local, Product product) {
 		super();
 		this.idOpinion = idOpinion;
 		this.calificacion = calificacion;
 		this.opinion = opinion;
-		this.numProductos = numProductos;
 		this.cliente = cliente;
 		this.local = local;
+		this.product = product;
 	}
 
 	public int getIdOpinion() {
@@ -66,20 +77,12 @@ public class Opinion {
 		this.calificacion = calificacion;
 	}
 
-	public String getOpinion() {
+	public int getOpinion() {
 		return opinion;
 	}
 
-	public void setOpinion(String opinion) {
+	public void setOpinion(int opinion) {
 		this.opinion = opinion;
-	}
-
-	public float getNumProductos() {
-		return numProductos;
-	}
-
-	public void setNumProductos(float numProductos) {
-		this.numProductos = numProductos;
 	}
 
 	public Cliente getCliente() {
@@ -97,6 +100,13 @@ public class Opinion {
 	public void setLocal(Local local) {
 		this.local = local;
 	}
-		
-	
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
 }
