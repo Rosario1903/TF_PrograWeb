@@ -240,7 +240,10 @@
 						<div class="form-group row">
 							<label for="opinion" class="col-sm-2 col-form-label">Calificacion</label>
 							<div class="col-sm-6">
-								<input type="text" th:field="*{opinion}" class="form-control"
+								<input type="text" th:field="*{opinion}"placeholder="Introduzca calificación"
+                                      pattern="[0-5]{1}"
+                                     title="La calificación debe estar entre 0 y 5" 
+								 class="form-control"
 									required="required" th:errorclass="'form-control alert-danger'" />
 								<small class="form-text text-danger"
 									th:if="${#fields.hasErrors('opinion')}" th:errors="*{opinion}"></small>
