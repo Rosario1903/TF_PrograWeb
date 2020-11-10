@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 
+
 @Entity
 @Table(name = "products")
 public class Product {
@@ -17,16 +18,26 @@ public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idProduct;
+	/*@NotNull(message = "El campo es obligatorio")*/
 	@Column(name = "modelProduct", length = 40, nullable = false)
 	private String modelProduct;
+	/*@NotNull(message = "El campo es obligatorio")*/
 	@Column(name = "markProduct", length = 60, nullable = false)
 	private String markProduct;
+	/*@NotNull(message = "El campo es obligatorio")
+	@Max(value = 45, message = "No existen tallas mayores a 45")
+	@Min(value = 30, message = "No existen tallas menores a 30")*/
 	@Column(name = "sizeProduct", length = 45, nullable = false)
+	/*@NotNull(message = "El campo es obligatorio")*/
 	private int sizeProduct;
 	@Column(name = "typeProduct", length = 60, nullable = false)
 	private String typeProduct;
+	/*@NotNull(message = "El campo es obligatorio")
+	@Max(value = 1000, message = "Tratamos de vender zapatillas a menor precio, Lo sentimos")
+	@Min(value = 50, message = "No puedes vender un zapato a ese precio, modificalo")*/
 	@Column(name = "priceProduct", length = 45, nullable = false)
 	private int priceProduct;
+	/*@NotNull(message = "El campo es obligatorio")*/
 	@Column(name = "colourProduct", length = 45, nullable = false)
 	private String colourProduct;
 
