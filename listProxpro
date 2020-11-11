@@ -31,13 +31,13 @@
 
 		<!-- Sidebar -->
 		<ul
-			class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+			class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion"
 			id="accordionSidebar">
 
 			<!-- Sidebar - Brand -->
 			<a
 				class="sidebar-brand d-flex align-items-center justify-content-center"
-				th:href="@{/productsxsuppliers/list}">
+				th:href="@{/productsxsuppliers/index}">
 				<div class="sidebar-brand-icon rotate-n-15">
 					<i class="fas fa-leaf"></i>
 				</div>
@@ -49,53 +49,90 @@
 
 
 
-
 			<!-- Nav Item - Pages Collapse Menu -->
 			<li class="nav-item"><a class="nav-link collapsed" href="#"
-				data-target="#collapseTwo" aria-expanded=true
+				data-target="#collapseTwo" aria-expanded="false"
 				aria-controls="collapseTwo"> <i class="fas fa-fw fa-cog"></i> <span>Men&uacute;</span>
 			</a>
-				
-			<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
-				data-parent="#accordionSidebar">
-					<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
-						data-parent="#accordionSidebar">
-						<div class="bg-white py-2 collapse-inner rounded">
-							<a class="collapse-item" th:href="@{/clientes/list}">Clientes</a>
-						</div>
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/usuarios/list}">Usuarios</a>
 					</div>
-					<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
-						data-parent="#accordionSidebar">
-						<div class="bg-white py-2 collapse-inner rounded">
-							<a class="collapse-item" th:href="@{/proveedores/list}">Proveedores</a>
-						</div>
+				</div>
+
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/clientes/list}">Clientes</a>
 					</div>
-					<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
-						data-parent="#accordionSidebar">
-						<div class="bg-white py-2 collapse-inner rounded">
+				</div>
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/proveedores/list}">Proveedores</a>
+					</div>
+				</div>
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
 						<a class="collapse-item" th:href="@{/products/list}">Productos</a>
 					</div>
-					</div>
-					<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
-						data-parent="#accordionSidebar">
-						<div class="bg-white py-2 collapse-inner rounded">
-						<a class="collapse-item" th:href="@{/reservations/list}">Reservas</a>
-					</div>
-					</div>
-					<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
-						data-parent="#accordionSidebar">
-						<div class="bg-white py-2 collapse-inner rounded">
+				</div>
+
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
 						<a class="collapse-item" th:href="@{/productsxsuppliers/list}">Productos
 							por Proveedores</a>
 					</div>
+				</div>
+
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/reservations/list}">Reservas</a>
 					</div>
-					<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
-						data-parent="#accordionSidebar">
-						<div class="bg-white py-2 collapse-inner rounded">
-							<a class="collapse-item" th:href="@{/usuarios/list}">Usuarios</a>
-						</div>
+				</div>
+
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/descuentos/list}">Descuentos</a>
 					</div>
-			</li>
+				</div>
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/distribuciones/list}">Distribuciones</a>
+					</div>
+				</div>
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/locals/list}">Locales</a>
+					</div>
+				</div>
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/opinions/list}">Opiniones</a>
+					</div>
+				</div>
+
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/ofertas/list}">Oferta</a>
+					</div>
+				</div>
+
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/tarjetas/list}">Tarjeta</a>
+					</div>
+				</div></li>
 
 
 			<!-- Divider -->
@@ -135,19 +172,6 @@
 							role="button" data-toggle="dropdown" aria-haspopup="true"
 							aria-expanded="false"> <i class="fas fa-search fa-fw"></i>
 						</a></li>
-
-
-
-						<!-- Nav Item - User Information -->
-						<li class="nav-item dropdown no-arrow"><a
-							class="nav-link dropdown-toggle" href="#" id="userDropdown"
-							role="button" data-toggle="dropdown" aria-haspopup="true"
-							aria-expanded="false"> <span
-								class="mr-2 d-none d-lg-inline text-gray-600 small"><img
-									th:src="@{/img/logout.png}" width="30" height="30" alt="logo"
-									align="middle"></img></span>
-						</a> <!-- Dropdown - User Information --></li>
-
 					</ul>
 
 				</nav>
@@ -157,36 +181,98 @@
 				<div class="container-fluid">
 
 					<!-- Page Heading -->
-					<h1 class="h3 mb-4 text-gray-800">Producto por Proveedor</h1>
-
-					<a th:href="@{/productsxsuppliers/new/}" class="btn btn-secondary btn-xs">Nuevo</a>
+					<h1 class="h3 mb-4 text-gray-800">Productos por Proveedor</h1>
 
 					<hr class="sidebar-divider">
+					<div th:object="${proxpro}" th:remove="tag">
+						<ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger"
+							role="alert">
+							<li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+						</ul>
+					</div>
 
-					<table class="table table-striped">
-						<thead class="thead-dark">
-							<tr>
-								<th scope="col">Id</th>
-								<th scope="col">Cantidad de Productos</th>
-								<th scope="col">Fecha de Creacion</th>
-								<th scope="col">Nombre Proveedor</th>
-								<th scope="col">Modelo de Producto</th>
-								<th scope="col">Tipo de Producto</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="pp: ${listaProxpro}">
-								<td th:text="${pp.idProxpro}"></td>
-								<td th:text="${pp.numberProxpro}"></td>
-								<td th:text="${#dates.format(pp.DateProxpro,'dd/MM/yyyy')}"></td>
-								<td th:text="${pp.proveedor.usuario.nombreUsuario}"></td>
-								<td th:text="${pp.product.modelProduct}"></td>
-								<td th:text="${pp.product.typeProduct}"></td>
-							</tr>
-						</tbody>
-					</table>
+					<form th:action="@{/productsxsuppliers/save}" th:object="${proxpro}"
+						method="post">
+						<div class="form-group row">
+							<label for="name" class="col-sm-2 col-form-label">Nombre Clave de asociación</label>
+							<div class="col-sm-6">
+								<input type="text" th:field="*{nombreClave}"
+									class="form-control"required="required"
+									th:errorclass="'form-control alert-danger'" /> <small
+									class="form-text text-danger" 
+									th:if="${#fields.hasErrors('nombreClave')}"
+									th:errors="*{nombreClave}"></small>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="name" class="col-sm-2 col-form-label">Cantidad de Productos</label>
+							<div class="col-sm-6">
+								<input type="text" th:field="*{numberProxpro}"
+									class="form-control"required="required"
+									th:errorclass="'form-control alert-danger'" /> <small
+									class="form-text text-danger" 
+									th:if="${#fields.hasErrors('numberProxpro')}"
+									th:errors="*{numberProxpro}"></small>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="DateProxpro" class="col-sm-2 col-form-label">Fecha
+								de Creación</label>
+							<div class="col-sm-6">
+								<input type="date" th:field="*{DateProxpro}"
+									class="form-control"required="required"
+									th:errorclass="'form-control alert-danger'" /> <small
+									class="form-text text-danger" 
+									th:if="${#fields.hasErrors('DateProxpro')}"
+									th:errors="*{DateProxpro}"></small>
+							</div>
+						</div>
 
-					<p th:text="${mensaje}"></p>
+						<div class="form-group row">
+							<label for="category">Proveedor:</label>
+							<div class="col-sm-6">
+								<select class="form-control" required="required"
+									th:field="*{proveedor.idProveedor}">
+									<option th:each="p: ${listaProveedores}"
+										th:value="${p.idProveedor}" th:text="${p.usuario.nombreUsuario}"
+										th:selected="(${p.idProveedor} == *{proveedor.idProveedor})"></option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="category">Modelo de Producto:</label>
+							<div class="col-sm-6">
+								<select class="form-control" required="required"
+									th:field="*{product.idProduct}">
+									<option th:each="l: ${listaProductos}"
+										th:value="${l.idProduct}" th:text="${l.modelProduct}"
+										th:selected="(${l.idProduct} == *{product.idProduct})"></option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="category">Tipo de Producto:</label>
+							<div class="col-sm-6">
+								<select class="form-control" required="required"
+									th:field="*{product.idProduct}">
+									<option th:each="l: ${listaProductos}"
+										th:value="${l.idProduct}" th:text="${l.typeProduct}"
+										th:selected="(${l.idProduct} == *{product.idProduct})"></option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-sm-6">
+								<input type="submit" value="Guardar" class="btn btn-secondary"></input>
+								<a href="/productsxsuppliers/list" class="btn btn-success">Cancelar</a>
+							</div>
+						</div>
+						<p th:text="${mensaje}" class="form-text text-danger"></p>
+
+					</form>
+
+
+
 
 				</div>
 				<!-- /.container-fluid -->
@@ -198,7 +284,7 @@
 			<footer class="sticky-footer bg-white">
 				<div class="container my-auto">
 					<div class="copyright text-center my-auto">
-						<span>Copyright &copy; Web 202002</span>
+						<span>Copyright &copy; Web 2019</span>
 					</div>
 				</div>
 			</footer>
@@ -215,7 +301,30 @@
 		class="fas fa-angle-up"></i>
 	</a>
 
-
+	<!-- Logout Modal-->
+	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">¿Listo para
+						salir?</h5>
+					<button class="close" type="button" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">Seleccione "Cerrar sesión" a
+					continuación si está listo para finalizar su sesión actual</div>
+				<div class="modal-footer">
+					<button class="btn btn-secondary" type="button"
+						data-dismiss="modal">Cancelar</button>
+					<a class="btn btn-primary" th:href="@{/categories/index}">Cerrar
+						Sesión</a>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<!-- Bootstrap core JavaScript-->
 	<script src="/vendor/jquery/jquery.min.js"></script>
