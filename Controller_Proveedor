@@ -1,0 +1,158 @@
+package pe.edu.upc.controller;
+
+
+import java.util.List;
+import java.util.Optional;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.sun.el.parser.ParseException;
+
+
+import pe.edu.upc.entity.Proveedor;
+import pe.edu.upc.serviceinterface.IProveedorService;
+import pe.edu.upc.serviceinterface.IUsuarioService;
+
+@Controller
+@RequestMapping("/proveedores")
+public class ProveedorController {
+	
+	@Autowired
+	private IUsuarioService uS;
+	
+	@Autowired
+	private IProveedorService pS;
+	
+	@GetMapping("/new")
+	public String newProveedor(Model model) {
+		
+		model.addAttribute("listaUsuarios", uS.listUsuario());
+		model.addAttribute("proveedor", new Proveedor());
+		
+		return "proveedor/proveedor";
+		
+	}
+	
+	@PostMapping("/save")
+	public String saveProveedor(@Valid Proveedor proveedor, BindingResult result, Model model, SessionStatus status) throws Exception {
+		
+	
+		if (result.hasErrors()) {
+			model.addAttribute("listaUsuarios", uS.listUsuario());
+			return "proveedor/proveedor";
+			
+		} else {
+			
+			int rpta = pS.insert(proveedor);
+			if (rpta > 0) {
+				model.addAttribute("listaUsuarios", uS.listUsuario());
+				model.addAttribute("mensaje", "Ya existe ruc");
+				return "/proveedor/proveedor";
+			} else {
+				model.addAttribute("mensaje", "Se guardó correctamente");
+				status.setComplete();
+			}
+			model.addAttribute("listaProveedores", pS.listProveedor());
+			
+			return "redirect:/proveedores/list";
+		}
+	
+	}
+	
+	
+	@GetMapping("/list")
+	public String listProveedores(Model model) {
+		
+		try {
+			
+			model.addAttribute("listaProveedores", pS.listProveedor());
+			model.addAttribute("proveedor", new Proveedor());
+			
+		} catch (Exception e) {
+			System.out.println("Error al listar proveedores en el controlador");
+		}
+		
+		return "proveedor/listProveedor";
+	}
+	@RequestMapping("/find")
+	public String findProveedor(Model model, @Validated Proveedor proveedor) throws ParseException{
+		
+		List<Proveedor> listaProveedor;
+		listaProveedor = pS.findByProveedor(proveedor.getRuc());
+		
+		if (listaProveedor.isEmpty()) {
+			
+			model.addAttribute("mensaje", "No se encontró");
+			
+		} 
+		model.addAttribute("proveedor", new Proveedor());
+		model.addAttribute("listaProveedores", listaProveedor);		
+		return "proveedor/listProveedor";
+		
+	}
+	@RequestMapping("/delete/{id}")
+	public String deleteProveedor(Model model, @PathVariable(value = "id") int id) {
+		try {
+			if (id > 0) {
+				pS.delete(id);
+			}
+			model.addAttribute("proveedor", new Proveedor());
+			model.addAttribute("mensaje", "Se eliminó correctamente!");
+			model.addAttribute("listaProveedores", pS.listProveedor());
+		} catch (Exception e) {
+			model.addAttribute("proveedor", new Proveedor());
+			model.addAttribute("mensaje", "No se puede eliminar!!");
+			model.addAttribute("listaProveedores", pS.listProveedor());
+
+		}
+
+		return "proveedor/listProveedor";
+
+	}
+	@RequestMapping("/irupdate/{id}")
+	public String irUpdate(@PathVariable int id, Model model, RedirectAttributes objRedir) {
+		Optional<Proveedor> objPro = pS.searchId(id);
+		if (objPro == null) {
+			model.addAttribute("listaUsuarios", uS.listUsuario());
+			objRedir.addFlashAttribute("mensaje", "Ocurrió un error");
+			return "redirect:/proveedores/list";
+		} else {
+			model.addAttribute("listaUsuarios", uS.listUsuario());
+			model.addAttribute("proveedor", objPro.get());
+			return "proveedor/uproveedor";
+
+		}
+		
+
+	}
+	@PostMapping("/update")
+	public String updateProveedor(@Valid Proveedor proveedor, BindingResult result, Model model, SessionStatus status)
+			throws Exception {
+		  if (result.hasErrors()) {
+	            return "proveedor/proveedor";
+	        } else {
+
+	            pS.insert(proveedor);
+	            model.addAttribute("mensaje","Registro Actualizado");
+	            model.addAttribute("listaUsuarios", pS.listProveedor());
+	        }
+	        model.addAttribute("listaClientes", pS.listProveedor());
+	        return "redirect:/proveedores/list";
+
+	}
+	
+
+	
+}
