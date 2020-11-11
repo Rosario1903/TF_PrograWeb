@@ -1,12 +1,20 @@
 package pe.edu.upc.serviceinterface;
 
 import java.util.List;
+import java.util.Optional;
 
+import pe.edu.upc.entity.Reserva;
 import pe.edu.upc.entity.Tarjeta;
 
 public interface ITarjetaService {
 
 	public void insert (Tarjeta tarj);
 
+	
+	public void delete (int idTarjeta);
+	public Optional<Tarjeta> searchId(int idTarjeta);
+	
 	public List<Tarjeta>list();
+	List<Tarjeta> findByUsuarioNombreUsuario(String nombreUsuario);
+
 }
