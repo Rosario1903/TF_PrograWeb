@@ -31,7 +31,7 @@
 
 		<!-- Sidebar -->
 		<ul
-			class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+			class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion"
 			id="accordionSidebar">
 
 			<!-- Sidebar - Brand -->
@@ -109,17 +109,31 @@
 					<div class="bg-white py-2 collapse-inner rounded">
 						<a class="collapse-item" th:href="@{/distribuciones/list}">Distribuciones</a>
 					</div>
-				</div> 
+				</div>
 				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
 					data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
 						<a class="collapse-item" th:href="@{/locals/list}">Locales</a>
 					</div>
-				</div> 
+				</div>
 				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
 					data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
 						<a class="collapse-item" th:href="@{/opinions/list}">Opiniones</a>
+					</div>
+				</div>
+
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/ofertas/list}">Oferta</a>
+					</div>
+				</div>
+
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+					data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<a class="collapse-item" th:href="@{/tarjetas/list}">Tarjeta</a>
 					</div>
 				</div>
 				
@@ -188,7 +202,28 @@
 					<h1 class="h3 mb-4 text-gray-800">Locales</h1>
 
 					<a th:href="@{/locals/new/}" class="btn btn-secondary btn-xs">Nuevo</a>
+          <form th:action="@{/locals/find}" method="post"
+						th:object="${local}">
 
+						<div class="form-group">
+							<table>
+								<tbody>
+									<tr>
+										<td><label for="nameLocal" 
+											class="col-sm-2 col-form-label">Buscar:</label></td>
+										<td><input type="text" class="form-control"
+											th:field="*{nameLocal}" id="nameLocal"
+											placeholder="nameLocal" required="required"></input></td>
+										<td><button type="submit" class="btn btn-success">
+												<i class="iconf fa fa-search" style="color:white;"></i>
+											</button></td>
+										<td><a href="/locals/list" class="btn btn-success">Limpiar</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+					</form>
 					<hr class="sidebar-divider">
 
 					<table class="table table-striped">
@@ -199,6 +234,8 @@
 								<th scope="col">Dirección</th>
 								<th scope="col">Numero de Productos</th>
 								<th scope="col">Id Proveedor</th>
+								<th scope="col">Eliminar</th>
+								<th scope="col">Actualizar</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -208,7 +245,14 @@
 								<td th:text="${l.adressLocal}"></td>
 								<td th:text="${l.numberproLocal}"></td>
 								<td th:text="${l.proveedor.idProveedor}"></td>
-																
+										<td>
+									<a
+									th:href="@{'/locals/delete/'+${l.idLocal}}"> 
+									<i class="iconf fa fa-trash" style="color: green;"></i>								
+									</a>									
+								</td>
+								<td><a th:href="@{'/locals/irupdate/'+${l.idLocal}}"><i
+										class="iconf fa fa-pen" style="color: green;"></i></a></td>	
 							</tr>
 						</tbody>
 					</table>
