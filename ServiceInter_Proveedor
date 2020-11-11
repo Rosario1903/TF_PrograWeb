@@ -1,13 +1,20 @@
 package pe.edu.upc.serviceinterface;
 
 import java.util.List;
+import java.util.Optional;
+
 
 import pe.edu.upc.entity.Proveedor;
 
 public interface IProveedorService {
 
-	public void insert(Proveedor pro);
-	
+	public int insert(Proveedor pro);
+
 	List<Proveedor> listProveedor();
+
+	List<Proveedor>findByProveedor(String ruc);
+	public void delete(int idProveedor);
 	
+	Optional<Proveedor>searchId(int idProveedor);
+
 }
