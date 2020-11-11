@@ -1,8 +1,18 @@
 package pe.edu.upc.repository;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+
 import pe.edu.upc.entity.Local;
 @Repository
 public interface LocalRepository extends JpaRepository<Local,Integer >{
+	@Query("from Local l where l.nameLocal like %:nameLocal% ")
+	List<Local>findByLocal(String nameLocal);
 	
+	@Query("select count(l.nameLocal) from Local l where l.nameLocal=:nameLocal")
+	public int searchLocal(@Param("nameLocal") String nameLocal);
 }
