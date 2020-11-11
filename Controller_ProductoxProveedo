@@ -1,62 +1,139 @@
 package pe.edu.upc.controller;
+
+import java.util.List;
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import pe.edu.upc.entity.ProductoxProveedor;
+import com.sun.el.parser.ParseException;
+
+import pe.edu.upc.entity.Oferta;
+import pe.edu.upc.serviceinterface.IOfertaService;
 import pe.edu.upc.serviceinterface.IProductService;
-import pe.edu.upc.serviceinterface.IProveedorService;
-import pe.edu.upc.serviceinterface.IProductoxProveedorService;
 
 @Controller
-@RequestMapping("/productsxsuppliers")
-public class ProductoxProveedorController {
+@RequestMapping("/ofertas")
+public class OfertaController {
 
 	@Autowired
-	private IProductoxProveedorService ppS;
+	private IOfertaService oS;
 
 	@Autowired
-	private IProductService pdS;
-	
-	@Autowired
-	private IProveedorService pvS;
+	private IProductService pS;
 
 	@GetMapping("/new")
-	public String newProxpro(Model model) {
+	public String newOferta(Model model) {
+		model.addAttribute("listaProductos", pS.list());
+		model.addAttribute("oferta", new Oferta());
 
-		model.addAttribute("listaProveedores", pvS.listProveedor());
-		model.addAttribute("listaProductos", pdS.list());
-		model.addAttribute("proxpro", new ProductoxProveedor());
-		return "proxpro/proxpro";
+		return "oferta/oferta";
 	}
 
 	@PostMapping("/save")
-	public String saveVaccine(@Valid ProductoxProveedor proxpro, BindingResult result, Model model, SessionStatus status)
+	public String saveOferta(@Valid Oferta oferta, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
-
 		if (result.hasErrors()) {
-			return "proxpro/proxpro";
+			model.addAttribute("listaProductos", pS.list());
+			return "oferta/oferta";
 		} else {
-			ppS.insert(proxpro);
+			oS.insert(oferta);
 		}
-		model.addAttribute("listaProxpro", ppS.list());
-		return "redirect:/productsxsuppliers/list";
+
+		model.addAttribute("listaOfertas", oS.list());
+		return "redirect:/ofertas/list";
 	}
 
 	@GetMapping("/list")
-	public String listVaccines(Model model) {
+	public String listOfertas(Model model) {
+
 		try {
-			model.addAttribute("listaProxpro", ppS.list());
+			model.addAttribute("oferta", new Oferta());
+			model.addAttribute("listaOfertas", oS.list());
 		} catch (Exception e) {
-			System.out.println("Error al listar Producto por Proveedor en el controller");
+			System.out.println("Error a listar Ofertas en el Controller");
 		}
-		return "proxpro/listProxpro";
+		return "oferta/listOferta";
 	}
+	
+	@RequestMapping("/find")
+	public String findOferta(Model model,@Validated Oferta oferta ) throws ParseException {
+		
+		List<Oferta> listOfertas;		
+		listOfertas=oS.findBynameOferta(oferta.getNombreOferta());
+
+		if(listOfertas.isEmpty()) {
+			model.addAttribute("mensaje", "No se encontró");
+		}		
+		
+		model.addAttribute("listaOfertas",listOfertas);
+		
+		return "oferta/listOferta";		
+	}
+	
+	@RequestMapping("/delete/{id}")
+	public String deleteLaboratory(Model model, @PathVariable(value = "id") int id) {
+		try {
+			if (id > 0) {
+				oS.delete(id);
+			}
+			model.addAttribute("oferta", new Oferta());
+			model.addAttribute("mensaje", "Se eliminó correctamente");
+			model.addAttribute("listaProductos", pS.list());
+			model.addAttribute("listaOfertas", oS.list());
+			
+		} catch (Exception e) {
+			model.addAttribute("oferta", new Oferta());
+			model.addAttribute("mensaje", "No se puede eliminar!!");
+			model.addAttribute("listaProductos", pS.list());
+			model.addAttribute("listaOfertas", oS.list());
+		}
+
+		return "oferta/listOferta";		
+
+	}
+	
+	
+	@RequestMapping("/irupdate/{id}")
+	public String irUpdate(@PathVariable int id, Model model, RedirectAttributes objRedir) {	
+		Optional<Oferta> objVac=oS.serchId(id);
+		if(objVac==null) {
+			objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
+			return "redirect:/oferta/list";
+			
+		}	else {
+			
+			model.addAttribute("listaProductos", pS.list());
+			model.addAttribute("oferta", objVac.get());
+			return "oferta/uoferta";
+		}
+	
+	}
+	
+	@PostMapping("/update")
+	public String updateVaccine(@Valid Oferta oferta, BindingResult result, Model model, SessionStatus status)
+			throws Exception {
+		if (result.hasErrors()) {
+			return "oferta/oferta";
+		} else {
+			oS.insert(oferta);
+			model.addAttribute("mensaje","Registro actualizado" );
+			model.addAttribute("listaProductos", pS.list());
+		}
+		model.addAttribute("listaOfertas", oS.list());
+		return "oferta/listOferta";
+
+	}
+	
 }
