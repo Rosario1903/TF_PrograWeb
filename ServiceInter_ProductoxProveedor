@@ -1,9 +1,20 @@
 package pe.edu.upc.serviceinterface;
 import java.util.List;
+import java.util.Optional;
+
+
 import pe.edu.upc.entity.ProductoxProveedor;
 
 public interface IProductoxProveedorService {
-public void insert (ProductoxProveedor proxpro);
+	
+	public void insert (ProductoxProveedor proxpro);
 	
 	public List<ProductoxProveedor> list();
+	
+	List<ProductoxProveedor>findByname(String nombreClave);
+
+	public void delete(int idPxP);
+
+	Optional<ProductoxProveedor> serchId(int idPxP);
+
 }
