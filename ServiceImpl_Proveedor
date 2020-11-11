@@ -1,6 +1,9 @@
 package pe.edu.upc.serviceimpl;
 
 import java.util.List;
+import java.util.Optional;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,21 +13,10 @@ import pe.edu.upc.repository.ProveedorRepository;
 import pe.edu.upc.serviceinterface.IProveedorService;
 
 @Service
-public class ProveedorServiceImpl implements IProveedorService{
+public class ProveedorServiceImpl implements IProveedorService {
 
 	@Autowired
 	private ProveedorRepository pR;
-	
-	@Override
-	public void insert(Proveedor pro) {
-		try {
-			pR.save(pro);
-			
-		} catch (Exception e) {
-			System.out.println("Error en el serviceimpl Proveedor");
-		}
-		
-	}
 
 	@Override
 	public List<Proveedor> listProveedor() {
@@ -32,5 +24,34 @@ public class ProveedorServiceImpl implements IProveedorService{
 		return pR.findAll();
 	}
 
-	
+	@Transactional
+	@Override
+	public int insert(Proveedor pro) {
+		int rpta = pR.searchProveedor(pro.getRuc());
+		if (rpta == 0) {
+			pR.save(pro);
+		}
+		return rpta;
+	}
+
+
+
+	@Override
+	public void delete(int idProveedor) {
+		// TODO Auto-generated method stub
+		pR.deleteById(idProveedor);;
+	}
+
+	@Override
+	public Optional<Proveedor> searchId(int idProveedor) {
+		return pR.findById(idProveedor);
+	}
+
+	@Override
+	public List<Proveedor> findByProveedor(String ruc) {
+		// TODO Auto-generated method stub
+		return pR.findByProveedor(ruc);
+	}
+
+
 }
