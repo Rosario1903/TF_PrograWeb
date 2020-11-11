@@ -1,9 +1,14 @@
 package pe.edu.upc.repository;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import pe.edu.upc.entity.ProductoxProveedor;
 @Repository
 public interface ProductoxProveedorRepository extends JpaRepository<ProductoxProveedor,Integer> {
-
+	@Query("from ProductoxProveedor p where p.nombreClave like %:name% or p.product.modelProduct like %:name% or p.proveedor.usuario.nombreUsuario like %:name%")
+	List<ProductoxProveedor> findByname(@Param("name")String nombreClave);
 }
