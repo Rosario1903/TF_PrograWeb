@@ -1,49 +1,63 @@
 package pe.edu.upc.entity;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "Proveedores")
-
 public class Proveedor {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idProveedor;
 	
-	@NotNull(message = "El ruc es obligatorio")
-	@Column(name ="ruc", length = 20, nullable = false)
-	private int ruc;
+
+	@Column(name ="ruc", length = 11, nullable = false)
+	private String ruc;
 	
+	
+	@ManyToOne
+	@JoinColumn(name = "idUsuario")
+	private Usuario usuario;
+
 	public Proveedor() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	public Proveedor(int idProveedor, int ruc) {
-		super();
-		this.idProveedor = idProveedor;
-		this.ruc = ruc;
-	}
-	
+
 	public int getIdProveedor() {
 		return idProveedor;
 	}
+
 	public void setIdProveedor(int idProveedor) {
 		this.idProveedor = idProveedor;
 	}
-	public int getRuc() {
+
+	public String getRuc() {
 		return ruc;
 	}
-	public void setRuc(int ruc) {
+
+	public void setRuc(String ruc) {
 		this.ruc = ruc;
 	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+
+	
 	
 	
 	
