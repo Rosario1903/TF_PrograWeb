@@ -1,50 +1,24 @@
-package pe.edu.upc.entity;
+package pe.edu.upc.repository;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
-@Entity
-@Table(name = "Proveedores")
 
-public class Proveedor {
+import java.util.List;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idProveedor;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+
+import pe.edu.upc.entity.Proveedor;
+
+@Repository
+public interface ProveedorRepository extends JpaRepository<Proveedor, Integer> {
+
+	@Query("from Proveedor p where p.ruc like %:ruc% ")
+	List<Proveedor>findByProveedor(String ruc);
 	
-	@NotNull(message = "El ruc es obligatorio")
-	@Column(name ="ruc", length = 20, nullable = false)
-	private int ruc;
-	
-	public Proveedor() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	
-	public Proveedor(int idProveedor, int ruc) {
-		super();
-		this.idProveedor = idProveedor;
-		this.ruc = ruc;
-	}
-	
-	public int getIdProveedor() {
-		return idProveedor;
-	}
-	public void setIdProveedor(int idProveedor) {
-		this.idProveedor = idProveedor;
-	}
-	public int getRuc() {
-		return ruc;
-	}
-	public void setRuc(int ruc) {
-		this.ruc = ruc;
-	}
-	
-	
-	
+	@Query("select count(p.ruc) from Proveedor p where p.ruc=:ruc")
+	public int searchProveedor(@Param("ruc") String ruc);
+
 }
