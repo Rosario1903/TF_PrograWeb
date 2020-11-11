@@ -1,5 +1,6 @@
 package pe.edu.upc.serviceimpl;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ public class ProductoxProveedorServiceImpl implements IProductoxProveedorService
 
 	@Autowired
 	private ProductoxProveedorRepository ppR;
+	
 	@Transactional
 	@Override
 	public void insert(ProductoxProveedor proxpro) {
@@ -25,5 +27,28 @@ public class ProductoxProveedorServiceImpl implements IProductoxProveedorService
 		
 		return ppR.findAll();
 	}
+	
+	@Override
+	public List<ProductoxProveedor> findByname(String nombreClave) {
+		// TODO Auto-generated method stub
+		return ppR.findByname(nombreClave);
+	}
+	
+	@Override
+	public void delete(int idPxP) {
+		try {
+			ppR.deleteById(idPxP);
+		} catch (Exception e) {
+			System.out.println("Error en el delete serviceimpl PxP");
+		}
+	}
+
+	@Override
+	public Optional<ProductoxProveedor> serchId(int idPxP) {
+		// TODO Auto-generated method stub
+		return ppR.findById(idPxP);
+	}
+
+
 
 }
