@@ -12,9 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.PastOrPresent;
 
-import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -23,20 +22,23 @@ public class ProductoxProveedor {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idProxpro;
+
+	@Column(name = "nombreClave", length = 25, nullable = false)
+	private String nombreClave;
+
 	@Column(name = "numberProxpro", length = 45, nullable = false)
 	private int numberProxpro;
-	
-	@NotNull(message = "la fecha es obligatoria")
-	@FutureOrPresent(message = "la fecha debe ser actual o futura")
+
+	@PastOrPresent(message = "la fecha debe ser actual o futura")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "DateProxpro")
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date DateProxpro;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "idProduct")
 	private Product product;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "idProveedor")
 	private Proveedor proveedor;
@@ -46,10 +48,11 @@ public class ProductoxProveedor {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ProductoxProveedor(int idProxpro, int numberProxpro, @FutureOrPresent Date dateProxpro,
-			Product product, Proveedor proveedor) {
+	public ProductoxProveedor(int idProxpro, String nombreClave, int numberProxpro, Date dateProxpro, Product product,
+			Proveedor proveedor) {
 		super();
 		this.idProxpro = idProxpro;
+		this.nombreClave = nombreClave;
 		this.numberProxpro = numberProxpro;
 		this.DateProxpro = dateProxpro;
 		this.product = product;
@@ -95,7 +98,13 @@ public class ProductoxProveedor {
 	public void setProveedor(Proveedor proveedor) {
 		this.proveedor = proveedor;
 	}
-	
-	
-	
+
+	public String getNombreClave() {
+		return nombreClave;
+	}
+
+	public void setNombreClave(String nombreClave) {
+		this.nombreClave = nombreClave;
+	}
+
 }
