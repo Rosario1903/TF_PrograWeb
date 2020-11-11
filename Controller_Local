@@ -66,8 +66,7 @@ public class LocalController {
 	@PostMapping("/save")
 	public String saveLocal(@Valid Local local, BindingResult result, Model model,
 			@RequestParam("file") MultipartFile foto, RedirectAttributes flash, SessionStatus status) throws Exception {
-		if (result.hasErrors()) {
-
+		if (result.hasErrors()) {model.addAttribute("listaProveedores", pS.listProveedor());
 			return "local/local";
 
 		} else {
@@ -85,10 +84,19 @@ public class LocalController {
 			flash.addFlashAttribute("info", "Has subido correctamente '" + uniqueFilename + "'");
 			local.setFoto(uniqueFilename);
 
+		int rpta = lS.insert(local);
+			if (rpta > 0) {
+				model.addAttribute("listaProveedores", pS.listProveedor());
+				model.addAttribute("mensaje", "Ya existe id de Local");
+				return "/local/local";
+			} else {
+				model.addAttribute("mensaje", "Se guardó correctamente");
+				status.setComplete();
+			}
+			model.addAttribute("listaLocales", lS.list());
+			
+			return "redirect:/locals/list";
 		}
-		lS.insert(local);
-		model.addAttribute("listaLocales", lS.list());
-		return "redirect:/locals/list";
 	}
 
 	
@@ -105,4 +113,74 @@ public class LocalController {
 		return "local/listLocal";
 
 	}
+	@RequestMapping("/find")
+	public String findLocal(Model model, @Validated Local local) throws ParseException{
+		
+		List<Local> listaLocal;
+		listaLocal = lS.findByLocal(local.getNameLocal());
+		
+		if (listaLocal.isEmpty()) {
+			
+			model.addAttribute("mensaje", "No se encontró");
+			
+		} 
+		model.addAttribute("proveedor", new Proveedor());
+		model.addAttribute("listaLocales", listaLocal);		
+		return "local/listLocal";
+		
+	}
+	@RequestMapping("/delete/{id}")
+	public String deleteLocal(Model model, @PathVariable(value = "id") int id) {
+		try {
+			if (id > 0) {
+				lS.delete(id);
+			}
+			model.addAttribute("local", new Local());
+			model.addAttribute("mensaje", "Se eliminó correctamente!");
+			model.addAttribute("listaLocales", lS.list());
+		} catch (Exception e) {
+			model.addAttribute("local", new Local());
+			model.addAttribute("mensaje", "No se puede eliminar!!");
+			model.addAttribute("listaLocales", lS.list());
+
+		}
+
+		return "local/listLocal";
+
+	}
+	@RequestMapping("/irupdate/{id}")
+	public String irUpdate(@PathVariable int id, Model model, RedirectAttributes objRedir) {
+		Optional<Local> objLoc = lS.searchId(id);
+		if (objLoc == null) {
+			model.addAttribute("listaProveedores", pS.listProveedor());
+			objRedir.addFlashAttribute("mensaje", "Ocurrió un error");
+			return "redirect:/proveedores/list";
+		} else {
+			model.addAttribute("listaProveedores", pS.listProveedor());
+			model.addAttribute("local", objLoc.get());
+			return "local/ulocal";
+
+		}
+		
+
+	}
+	@PostMapping("/update")
+	public String updateLocal(@Valid Local local, BindingResult result, Model model, SessionStatus status)
+			throws Exception {
+		  if (result.hasErrors()) {
+	            return "local/local";
+	        } else {
+
+	            lS.insert(local);
+	            model.addAttribute("mensaje","Registro Actualizado");
+	            model.addAttribute("listaProveedores", lS.list());
+	        }
+	        model.addAttribute("listaLocales", lS.list());
+	        return "redirect:/locals/list";
+
+	}
+	
+
 }
+
+
