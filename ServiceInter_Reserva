@@ -1,6 +1,7 @@
 package pe.edu.upc.serviceinterface;
 
 import java.util.List;
+import java.util.Optional;
 
 import pe.edu.upc.entity.Reserva;
 
@@ -8,7 +9,12 @@ public interface IReservaService {
 	
 	public void insert(Reserva res);
 	
-	List<Reserva> list();
+	public List<Reserva> list();
+	List<Reserva> findByClienteUsuarioNombreUsuario(String nombreUsuario);
+
+	public void delete (int idReserva);
+	Optional<Reserva> searchId(int idReserva);
+
 	
 
 }
