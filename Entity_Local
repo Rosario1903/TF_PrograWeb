@@ -8,9 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
+
+
 
 
 @Entity
@@ -19,17 +18,15 @@ public class Local {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idLocal;
-	@NotNull(message = "El campo es obligatorio")
+
 	@Column(name = "nameLocal", length = 40, nullable = false)
 	private String nameLocal;
-	@NotNull(message = "El campo es obligatorio")
+	
 	@Column(name = "adressLocal", length = 60, nullable = false)
 	private String adressLocal;
 	
-	@NotNull(message = "El campo es obligatorio")
+	
 	@Column(name = "numberproLocal", length = 60, nullable = false)
-	@Positive
-	@Min(value = 30, message = "No puede tener menos de 30 productos")
 	private int numberproLocal;
 	
 	@ManyToOne
@@ -42,9 +39,8 @@ public class Local {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Local(int idLocal, @NotNull(message = "El campo es obligatorio") String nameLocal,
-			@NotNull(message = "El campo es obligatorio") String adressLocal,
-			@NotNull(message = "El campo es obligatorio") @Positive @Min(value = 30, message = "No puede tener menos de 30 productos") int numberproLocal,
+	public Local(int idLocal,  String nameLocal,
+			String adressLocal, int numberproLocal,
 			Proveedor proveedor, String foto) {
 		super();
 		this.idLocal = idLocal;
