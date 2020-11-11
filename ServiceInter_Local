@@ -1,9 +1,16 @@
 package pe.edu.upc.serviceinterface;
 import java.util.List;
-
+import java.util.Optional;
 
 import pe.edu.upc.entity.Local;
 public interface ILocalService {
-	public void insert(Local loc);
+	public int insert(Local loc);
 	List<Local>list();
+	
+	List<Local>findByLocal(String nameLocal);
+	
+	public void delete(int idLocal);
+	
+	Optional<Local>searchId(int idLocal);
+	
 }
